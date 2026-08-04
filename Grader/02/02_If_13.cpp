@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     int n=4;
     double mn = INT_MAX,mx = INT_MIN,x = 0;
     double A[4];

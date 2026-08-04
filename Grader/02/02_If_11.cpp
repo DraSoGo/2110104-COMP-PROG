@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     string s;
     cin >> s;
     if(s.length() > 2 || !(s[0] >= '0' && s[0] <= '9') || !(s[1] >= '0' && s[1] <= '9'))

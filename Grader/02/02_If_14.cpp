@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     string p1,p2;
     double g1,g2;
     char cp1,cp2,c11,c12,c21,c22;

@@ -2,6 +2,7 @@
 using namespace std;
 int main()
 {
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     double xe,ye,re,rp,xm,ym;
     cin >> xe >> ye >> re >> rp >> xm >> ym;
     double a,b,c,A,B,C;

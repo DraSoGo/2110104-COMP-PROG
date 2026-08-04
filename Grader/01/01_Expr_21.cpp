@@ -2,6 +2,7 @@
 using namespace std;
 int main()
 {
+    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     int h1, m1, s1, h2, m2, s2;
     cin >> h1 >> m1 >> s1;
     cin >> h2 >> m2 >> s2;
@@ -15,4 +16,5 @@ int main()
     dm = ds / 60;
     ds -= dm * 60;
     cout << dh << ':' << dm << ':' << ds;
+    return 0;
 }
