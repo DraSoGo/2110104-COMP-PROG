@@ -1,6 +1,3 @@
-5
-K R
-R R Y
-R B P G
-R B R K Y B
-R B Y G N B P K Y
+4
+A J Q 10
+C S C SX

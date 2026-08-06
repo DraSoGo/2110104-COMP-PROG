@@ -25,7 +25,7 @@ int main()
     ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     long long n,m;
     cin >> n >> m;
-    long long a = n,b = m,da = dig(n),db = dig(m),sum = 0,sda = poww(10,da);
+    long long a = n,b = m,da = dig(n),db = dig(m),sum = 0;
     if (da == db)
     {
         sum += (b-a)*da;
@@ -33,8 +33,8 @@ int main()
     }
     else
     {
-        sum += (sda-a)*da;
-        a = sda;
+        sum += (poww(10,da)-a)*da;
+        a = poww(10,da);
     }
     // cout << a << " " << sum << "\n";
     da++;
