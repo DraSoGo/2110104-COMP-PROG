@@ -1,4 +1,4 @@
-	Command being timed: "./04_Array_23.out"
+	Command being timed: "./04_Array_28.out"
 	User time (seconds): 0.00
 	System time (seconds): 0.00
 	Percent of CPU this job got: 100%
@@ -7,11 +7,11 @@
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 6756
+	Maximum resident set size (kbytes): 3620
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 926
-	Voluntary context switches: 1
+	Minor (reclaiming a frame) page faults: 148
+	Voluntary context switches: 0
 	Involuntary context switches: 0
 	Swaps: 0
 	File system inputs: 0
