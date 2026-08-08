@@ -1,4 +1,2 @@
-087-222-2222 --> Henry Pym
-Steven Rogers --> 089-444-4444
-Monica Rambeau --> Not found
-911 --> Not found
+Total ice cream sales: 1066.5
+Top sales: Magnum
