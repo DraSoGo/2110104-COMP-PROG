@@ -29,24 +29,23 @@ You can see problem in this [drive](https://drive.google.com/drive/folders/1VCiY
 
 
 ### 📋 Table of Contents
-- [01\_Expr\_31](#01_expr_31)
-- [02\_If\_31](#02_if_31)
-- [03\_Loop\_15](#03_loop_15)
-- [03\_Loop\_15](#03_loop_15-1)
-- [03\_Loop\_22](#03_loop_22)
-- [03\_Loop\_31](#03_loop_31)
-- [04\_Array\_14](#04_array_14)
-- [04\_Array\_28](#04_array_28)
-- [04\_Array\_29](#04_array_29)
-- [04\_Array\_32](#04_array_32)
-- [05\_String\_12](#05_string_12)
-- [05\_String\_21](#05_string_21)
-- [05\_String\_23](#05_string_23)
-- [05\_String\_31](#05_string_31)
-- [06\_Vector\_11](#06_vector_11)
-- [06\_Vector\_14](#06_vector_14)
-- [06\_Vector\_23](#06_vector_23)
-- [06\_Vector\_32](#06_vector_32)
+- [01\_Expr\_31](#01_expr_31) - Interesting problem
+- [02\_If\_31](#02_if_31) - Function
+- [03\_Loop\_15](#03_loop_15) - Short Hand If Else (Ternary Operator)
+- [03\_Loop\_22](#03_loop_22) - Prime Number (Not max optimize)
+- [03\_Loop\_31](#03_loop_31) - Interesting problem
+- [04\_Array\_14](#04_array_14) - Prefix sum 2d array
+- [04\_Array\_28](#04_array_28) - To lower
+- [04\_Array\_29](#04_array_29) - Struct
+- [04\_Array\_32](#04_array_32) - Interesting Problem
+- [05\_String\_12](#05_string_12) - Interesting Problem
+- [05\_String\_21](#05_string_21) - Is upper,Is lower,Is digit
+- [05\_String\_23](#05_string_23) - Interesting Problem
+- [05\_String\_31](#05_string_31) - Bitwise operator, Is alpha
+- [06\_Vector\_11](#06_vector_11) - Deque
+- [06\_Vector\_14](#06_vector_14) - Set
+- [06\_Vector\_23](#06_vector_23) - Sorting of struct using bool operator
+- [06\_Vector\_32](#06_vector_32) - Custom compare sorting
 
 ---
 
@@ -68,16 +67,6 @@ ref: [doc](https://www.opendurian.com/news/mathcirdec/)
 solution: [code](Grader/02/02_If_31.cpp)
 
 ref: [doc](https://www.geeksforgeeks.org/cpp/functions-in-cpp/)
-
----
-
-### 03_Loop_15
-
-- Short Hand If Else (Ternary Operator) Line[12:12]
-
-solution: [code](Grader/03/03_Loop_15.cpp)
-
-ref: [doc](https://www.geeksforgeeks.org/cpp/cpp-ternary-or-conditional-operator/)
 
 ---
 
@@ -173,7 +162,7 @@ solution: [code](Grader/05/05_String_23.cpp)
 
 ### 05_String_31
 
-- Bit operator Line[48:49],Line[76:76]
+- Bitwise operator Line[48:49],Line[76:76]
 - isalpha Line[18:18],Line[67,67]
 
 solution: [code](Grader/05/05_String_31.cpp)
