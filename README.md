@@ -46,6 +46,12 @@ You can see problem in this [drive](https://drive.google.com/drive/folders/1VCiY
 - [06\_Vector\_14](#06_vector_14) - Set
 - [06\_Vector\_23](#06_vector_23) - Sorting of struct using bool operator
 - [06\_Vector\_32](#06_vector_32) - Custom compare sorting
+- [06\_Vector\_35](#06_vector_35) - Interesting Problem
+- [07\_Set\_11](#07_Set_11) - Multi Set
+- [08\_Map\_21](#08_Map_21) - Interesting Problem
+- [08\_Map\_26](#08_Map_26) - Interesting Problem
+- [08\_Map\_27](#08_Map_27) - string::npos
+- [08\_Map\_31](#08_Map_31) - Array in Struct
 
 ---
 
@@ -208,3 +214,55 @@ ref: [doc](https://www.daniweb.com/programming/software-development/threads/4899
 solution: [code](Grader/06/06_Vector_32.cpp)
 
 ref: [doc](https://www.geeksforgeeks.org/cpp/comparator-in-cpp/)
+
+---
+
+### 06_Vector_35
+
+- Interesting Problem
+
+solution: [code](Grader/06/06_Vector_35.cpp)
+
+---
+
+### 07_Set_11
+
+- Multi Set Line[7:7]
+
+solution: [code](Grader/07/07_Set_11.cpp)
+
+ref: [doc](https://www.geeksforgeeks.org/cpp/multiset-in-cpp-stl/)
+
+---
+
+### 08_Map_21
+
+- Interesting Problem
+- Use vector represent order
+
+solution: [code](Grader/08/08_Map_21.cpp)
+
+---
+
+### 08_Map_26
+
+- Interesting Problem
+- Easy Graph
+
+solution: [code](Grader/08/08_Map_26.cpp)
+
+---
+
+### 08_Map_27
+
+- string::npos == cna't find in string Line[41:41]
+
+solution: [code](Grader/08/08_Map_27.cpp)
+
+---
+
+### 08_Map_31
+
+- Array in struct Line[4:13]
+
+solution: [code](Grader/08/08_Map_31.cpp)
