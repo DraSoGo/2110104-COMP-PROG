@@ -1,3 +1,4 @@
-U: 0 1 2 3 4 5 7 8 9 10 
-I: empty set
-D: empty set
+087-222-2222 --> Henry Pym
+Steven Rogers --> 089-444-4444
+Monica Rambeau --> Not found
+911 --> Not found
