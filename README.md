@@ -269,7 +269,7 @@ solution: [code](Grader/08/08_Map_26.cpp)
 
 ### 08_Map_27
 
-- string::npos == cna't find in string Line[41:41]
+- string::npos == can't find in string Line[41:41]
 
 solution: [code](Grader/08/08_Map_27.cpp)
 
