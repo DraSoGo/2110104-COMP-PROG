@@ -27,7 +27,7 @@ You can see problem in this [drive](https://drive.google.com/drive/folders/1VCiY
 
 ## ⭐ Recommend
 
-about interesting problem and technic that I use to solve this.
+It about interesting problem and technic that I use to solve this.
 
 ### 📋 Table of Contents
 - [01\_Expr\_31](#01_expr_31) - Interesting problem
