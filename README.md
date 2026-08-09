@@ -65,7 +65,7 @@ It about interesting problem and technic that I use to solve this.
 
 solution: [code](Grader/01/01_Expr_31.cpp)
 
-ref: [doc](https://www.opendurian.com/news/mathcirdec/)
+source: [doc](https://www.opendurian.com/news/mathcirdec/)
 
 ---
 
@@ -76,7 +76,7 @@ ref: [doc](https://www.opendurian.com/news/mathcirdec/)
 
 solution: [code](Grader/02/02_If_31.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/functions-in-cpp/)
+source: [doc](https://www.geeksforgeeks.org/cpp/functions-in-cpp/)
 
 ---
 
@@ -86,7 +86,7 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/functions-in-cpp/)
 
 solution: [code](Grader/03/03_Loop_15.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/cpp-ternary-or-conditional-operator/)
+source: [doc](https://www.geeksforgeeks.org/cpp/cpp-ternary-or-conditional-operator/)
 
 ---
 
@@ -114,7 +114,7 @@ solution: [code](Grader/03/03_Loop_31.cpp)
 
 solution: [code](Grader/04/04_Array_14.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/dsa/prefix-sum-2d-array/),[video](https://www.youtube.com/watch?v=WibxoqMSMCw)
+source: [doc](https://www.geeksforgeeks.org/dsa/prefix-sum-2d-array/),[video](https://www.youtube.com/watch?v=WibxoqMSMCw)
 
 ---
 
@@ -132,7 +132,7 @@ solution: [code](Grader/04/04_Array_28.cpp)
 
 solution: [code](Grader/04/04_Array_29.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/structures-in-cpp/)
+source: [doc](https://www.geeksforgeeks.org/cpp/structures-in-cpp/)
 
 ---
 
@@ -177,7 +177,7 @@ solution: [code](Grader/05/05_String_23.cpp)
 
 solution: [code](Grader/05/05_String_31.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/cpp-bitwise-operators/),[video](https://www.youtube.com/watch?v=jlQmeyce65Q)
+source: [doc](https://www.geeksforgeeks.org/cpp/cpp-bitwise-operators/),[video](https://www.youtube.com/watch?v=jlQmeyce65Q)
 
 ---
 
@@ -187,7 +187,7 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/cpp-bitwise-operators/),[video](htt
 
 solution: [code](Grader/06/06_Vector_11.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/deque-cpp-stl/)
+source: [doc](https://www.geeksforgeeks.org/cpp/deque-cpp-stl/)
 
 ---
 
@@ -197,7 +197,7 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/deque-cpp-stl/)
 
 solution: [code](Grader/06/06_Vector_14.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/set-in-cpp-stl/)
+source: [doc](https://www.geeksforgeeks.org/cpp/set-in-cpp-stl/)
 
 ---
 
@@ -207,7 +207,7 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/set-in-cpp-stl/)
 
 solution: [code](Grader/06/06_Vector_23.cpp)
 
-ref: [doc](https://www.daniweb.com/programming/software-development/threads/489915/sorting-of-struct-using-bool-operator)
+source: [doc](https://www.daniweb.com/programming/software-development/threads/489915/sorting-of-struct-using-bool-operator)
 
 ---
 
@@ -217,7 +217,7 @@ ref: [doc](https://www.daniweb.com/programming/software-development/threads/4899
 
 solution: [code](Grader/06/06_Vector_32.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/comparator-in-cpp/)
+source: [doc](https://www.geeksforgeeks.org/cpp/comparator-in-cpp/)
 
 ---
 
@@ -235,7 +235,7 @@ solution: [code](Grader/06/06_Vector_35.cpp)
 
 solution: [code](Grader/07/07_Set_11.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/multiset-in-cpp-stl/)
+source: [doc](https://www.geeksforgeeks.org/cpp/multiset-in-cpp-stl/)
 
 ---
 
@@ -254,7 +254,7 @@ solution: [code](Grader/08/08_Map_21.cpp)
 
 solution: [code](Grader/08/08_Map_23.cpp)
 
-ref: [doc](https://www.geeksforgeeks.org/cpp/range-based-loop-c/)
+source: [doc](https://www.geeksforgeeks.org/cpp/range-based-loop-c/)
 
 ---
 
@@ -289,7 +289,7 @@ solution: [code](Grader/08/08_Map_31.cpp)
 
 solution: [code](Grader/09/09_Recur_33.cpp)
 
-ref: [doc1](https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/),[doc2](https://www.geeksforgeeks.org/dsa/iterative-depth-first-traversal/),[video](https://www.youtube.com/watch?v=pBasV9jlQ0w)
+source: [doc1](https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/),[doc2](https://www.geeksforgeeks.org/dsa/iterative-depth-first-traversal/),[video](https://www.youtube.com/watch?v=pBasV9jlQ0w)
 
 ---
 
@@ -299,4 +299,4 @@ ref: [doc1](https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/),[doc2](https://
 
 solution: [code](Grader/09/09_Recur_33.cpp)
 
-ref: [doc1](https://www.geeksforgeeks.org/cpp/queue-cpp-stl/),[doc2](https://www-geeksforgeeks-org.translate.goog/python/python-program-for-breadth-first-search-or-bfs-for-a-graph/?_x_tr_sl=en&_x_tr_tl=th&_x_tr_hl=th&_x_tr_pto=tc&_x_tr_hist=true),[video](https://www.youtube.com/watch?v=oOlN-qWJzzA)
+source: [doc1](https://www.geeksforgeeks.org/cpp/queue-cpp-stl/),[doc2](https://www-geeksforgeeks-org.translate.goog/python/python-program-for-breadth-first-search-or-bfs-for-a-graph/?_x_tr_sl=en&_x_tr_tl=th&_x_tr_hl=th&_x_tr_pto=tc&_x_tr_hist=true),[video](https://www.youtube.com/watch?v=oOlN-qWJzzA)
