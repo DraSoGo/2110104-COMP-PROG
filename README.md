@@ -50,9 +50,12 @@ about interesting problem and technic that I use to solve this.
 - [06\_Vector\_35](#06_vector_35) - Interesting Problem
 - [07\_Set\_11](#07_Set_11) - Multi Set
 - [08\_Map\_21](#08_Map_21) - Interesting Problem
+- [08\_Map\_23](#08_Map_23) - Range-Based for Loop
 - [08\_Map\_26](#08_Map_26) - Interesting Problem
 - [08\_Map\_27](#08_Map_27) - string::npos
 - [08\_Map\_31](#08_Map_31) - Array in Struct
+- [09\_Recur\_33](#09_Recur_33) - DFS by Stack
+- [09\_Recur\_41](#09_Recur_41) - BFS by Queue
 
 ---
 
@@ -225,7 +228,7 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/comparator-in-cpp/)
 solution: [code](Grader/06/06_Vector_35.cpp)
 
 ---
-
+09_Recur_33
 ### 07_Set_11
 
 - Multi Set Line[7:7]
@@ -242,6 +245,15 @@ ref: [doc](https://www.geeksforgeeks.org/cpp/multiset-in-cpp-stl/)
 - Use vector represent order
 
 solution: [code](Grader/08/08_Map_21.cpp)
+
+---
+
+### 08_Map_23
+
+- Range-Based for Loop (For auto) Line[16:19];
+
+solution: [code](Grader/08/08_Map_23.cpp)
+ref: [doc](https://www.geeksforgeeks.org/cpp/range-based-loop-c/)
 
 ---
 
@@ -267,3 +279,21 @@ solution: [code](Grader/08/08_Map_27.cpp)
 - Array in struct Line[4:13]
 
 solution: [code](Grader/08/08_Map_31.cpp)
+
+---
+
+### 09_Recur_33
+
+- DFS by Stack Line[9:30]
+
+solution: [code](Grader/09/09_Recur_33.cpp)
+ref: [doc1](https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/),[doc2](https://www.geeksforgeeks.org/dsa/iterative-depth-first-traversal/),[video](https://www.youtube.com/watch?v=pBasV9jlQ0w)
+
+---
+
+### 09_Recur_41
+
+- BFS by Queue Line[8:32]
+
+solution: [code](Grader/09/09_Recur_33.cpp)
+ref: [doc1](https://www.geeksforgeeks.org/cpp/queue-cpp-stl/),[doc2](https://www-geeksforgeeks-org.translate.goog/python/python-program-for-breadth-first-search-or-bfs-for-a-graph/?_x_tr_sl=en&_x_tr_tl=th&_x_tr_hl=th&_x_tr_pto=tc&_x_tr_hist=true),[video](https://www.youtube.com/watch?v=oOlN-qWJzzA)
