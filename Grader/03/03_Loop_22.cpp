@@ -7,6 +7,19 @@ int main()
     int n,x,p = 2;
     cin >> n;
     x = n;
+    bool ch1 = 1;
+    for (int i = 2; i*i <= x; i++)
+    {
+        if (x % i == 0)
+        {
+            ch1 = 0;
+        }
+    }
+    if (ch1)
+    {
+        cout << x;
+        return 0;
+    }
     while (n != 1)
     {
         // cout << p << "\n";
