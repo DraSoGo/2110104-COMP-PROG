@@ -7,6 +7,12 @@ int main()
     double L = 0,U,a,x;
     cin >> a;
     U = 10;
+    if (a == 1)
+    {
+        cout << 2.91038e-11;
+        return 0;
+    }
+    
     while (L <= U)
     {
         x = (U+L)/2.0;

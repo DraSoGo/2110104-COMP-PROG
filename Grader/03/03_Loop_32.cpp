@@ -11,6 +11,19 @@ int main()
     {
         string s,tmp = "";
         getline(cin,s);
+        if (s.length() == 1)
+        {
+            if (s[0] == 'R')
+            {
+                cout << 1;
+            }
+            else
+            {
+                cout << "WRONG_INPUT";
+            }
+            cout << "\n";
+            continue;
+        }
         int sum = 0;
         for (int i = 0; i < s.length(); i+=2)
         {

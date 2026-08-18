@@ -9,6 +9,7 @@ int main()
     // cin >> pat;
     getline(cin,pat);
     getline(cin,s);
+    s += "-";
     // cout << pat << " " << s;
     for (int i = 0; i < s.length()-pat.length()+1; i++)
     {
@@ -16,7 +17,9 @@ int main()
         // cout << tmp << "\n";
         if (pat == tmp)
         {
+            cout << i << "\n";
             ans++;
+            // i += pat.length();
         }
     }
     cout << ans;
