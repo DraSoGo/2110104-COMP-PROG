@@ -114,8 +114,10 @@ The organizer uses exclusive copies. It skips byte-identical destinations and ex
 
 ## GitHub Pages
 
-1. Run `npm run build`.
-2. Configure GitHub Pages to publish the contents of `dist/` through your preferred Pages workflow.
-3. Keep `.nojekyll` in the published output.
+1. Open the repository's **Settings → Pages** page.
+2. Set **Build and deployment → Source** to **GitHub Actions**.
+3. Push to `main`. `.github/workflows/pages.yml` runs the tests, content audit, and production build before deploying `dist/`.
+
+Pull requests targeting `main` run the same checks without deploying. You can also run the workflow manually from the Actions tab.
 
 All URLs are relative and page navigation uses URL hashes, so the build works from a repository subpath such as `https://username.github.io/repository/`.

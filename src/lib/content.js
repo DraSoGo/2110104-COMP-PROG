@@ -76,7 +76,7 @@ function categoryDescriptor(problem) {
     return { parentId: 'final', parentName: 'Final', parentCode: 'FIN', childId: `final-${child[0]}`, childName: child[1], childCode: order === 15 ? 'M' : child[1].slice(-2) };
   }
   const isQuiz = order === 18;
-  return { parentId: 'ovenbreak', parentName: 'Ovenbreak', parentCode: 'OVN', childId: isQuiz ? 'ovenbreak-quiz' : 'ovenbreak-final', childName: isQuiz ? 'Quiz' : 'Final', childCode: isQuiz ? 'Q' : 'F' };
+  return { parentId: 'ovenbreak', parentName: 'Ovenbreak', parentCode: 'OVN', childId: isQuiz ? 'ovenbreak-quiz' : 'ovenbreak-grader', childName: isQuiz ? 'Quiz' : 'Grader', childCode: isQuiz ? 'Q' : 'G' };
 }
 
 export function buildCategoryTree(problems) {

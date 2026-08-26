@@ -75,12 +75,12 @@ test('buildCategoryTree creates nested course, exam, and Ovenbreak groups', () =
     ['Course Topics', ['Expressions & Basic Strings']],
     ['Midterm', ['2023', '2024', 'Mock Exam']],
     ['Final', ['2025']],
-    ['Ovenbreak', ['Final', 'Quiz']],
+    ['Ovenbreak', ['Grader', 'Quiz']],
   ]);
 });
 
 test('problemCategoryPath returns parent and child breadcrumb labels', () => {
   assert.deepEqual(problemCategoryPath({ category: 'Midterm 2024', categoryOrder: 11 }), ['Midterm', '2024']);
-  assert.deepEqual(problemCategoryPath({ category: 'Ovenbreak', categoryOrder: 17 }), ['Ovenbreak', 'Final']);
+  assert.deepEqual(problemCategoryPath({ category: 'Ovenbreak', categoryOrder: 17 }), ['Ovenbreak', 'Grader']);
   assert.deepEqual(problemCategoryPath({ category: 'Quizzes', categoryOrder: 18 }), ['Ovenbreak', 'Quiz']);
 });

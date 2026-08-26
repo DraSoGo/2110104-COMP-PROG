@@ -74,7 +74,7 @@ function shellMarkup() {
   const summary = summarizeProblems(state.problems);
   return `<header class="topbar">
     <button class="menu-button" type="button" aria-label="Open problem navigation">${icon('menu')}</button>
-    <a class="wordmark" href="#/"><span class="prompt-mark">&gt;_</span><span><strong>2110101</strong><small>COMPUTER PROGRAMMING</small></span></a>
+    <a class="wordmark" href="#/"><span class="prompt-mark">&gt;_</span><span><strong>2110104</strong><small>COMPUTER PROGRAMMING</small></span></a>
     <label class="global-search">${icon('search')}<span class="sr-only">Search problems</span><input type="search" id="global-search" placeholder="Search problems..." autocomplete="off" value="${escapeHtml(state.query)}"><kbd>/</kbd></label>
     <div class="system-summary"><span>${summary.problems}<small>PROBLEMS</small></span><span>${summary.pdfs}<small>PDF</small></span><span>${summary.solutions}<small>SOLUTIONS</small></span></div>
     <button class="theme-button" type="button" aria-label="Toggle color theme">${document.documentElement.dataset.theme === 'dark' ? icon('sun') : icon('moon')}</button>
@@ -88,7 +88,7 @@ function overviewMarkup() {
   return `<div class="overview view-enter">
     <div class="terminal-label"><span>~/cedt/com_prog</span><span>overview.exe</span></div>
     <section class="overview-hero">
-      <p class="command-line"><span>$</span> ./browse-problems --course 2110101</p>
+      <p class="command-line"><span>$</span> ./browse-problems --course 2110104</p>
       <h1>Problem<br><span>Browser</span><i>_</i></h1>
       <p class="overview-copy">Browse course exercises, exam statements, and existing C++ solutions from one focused workspace.</p>
     </section>
@@ -219,7 +219,7 @@ function bindView(problem) {
 
 function renderRoute() {
   const problem = activeProblem();
-  document.title = problem ? `${problem.code} ${problem.title} · Problem Browser` : '2110101 Computer Programming · Problem Browser';
+  document.title = problem ? `${problem.code} ${problem.title} · Problem Browser` : '2110104 Computer Programming · Problem Browser';
   document.querySelector('#main').innerHTML = problem ? problemMarkup(problem) : overviewMarkup();
   bindView(problem);
   updateSidebar();
