@@ -1,0 +1,207 @@
+- generic [active] [ref=f4e1]:
+  - link "Skip to content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f4e3]:
+    - banner [ref=f4e4]:
+      - link ">_ 2110101 COMPUTER PROGRAMMING" [ref=f4e5] [cursor=pointer]:
+        - /url: "#/"
+        - generic [ref=f4e6]: ">_"
+        - generic [ref=f4e7]:
+          - strong [ref=f4e8]: "2110101"
+          - generic [ref=f4e9]: COMPUTER PROGRAMMING
+      - generic [ref=f4e10]:
+        - generic [ref=f4e14]: Search problems
+        - searchbox "Search problems /" [ref=f4e15]
+        - generic [ref=f4e16]: /
+      - generic [ref=f4e17]:
+        - generic [ref=f4e18]:
+          - text: "195"
+          - generic [ref=f4e19]: PROBLEMS
+        - generic [ref=f4e20]:
+          - text: "134"
+          - generic [ref=f4e21]: PDF
+        - generic [ref=f4e22]:
+          - text: "167"
+          - generic [ref=f4e23]: SOLUTIONS
+      - button "Toggle color theme" [ref=f4e24] [cursor=pointer]
+    - generic [ref=f4e28]:
+      - complementary "Problem navigation" [ref=f4e29]:
+        - generic [ref=f4e30]:
+          - text: //
+          - generic [ref=f4e31]: COURSE_INDEX
+        - navigation [ref=f4e32]:
+          - generic [ref=f4e33]:
+            - button "00 Introduction 1" [expanded] [ref=f4e34] [cursor=pointer]:
+              - generic [ref=f4e37]: "00"
+              - strong [ref=f4e38]: Introduction
+              - generic [ref=f4e39]: "1"
+            - link "00_Intro_11 Hello World Solution pending" [ref=f4e41] [cursor=pointer]:
+              - /url: "#/problem/00-introduction%2F00_Intro_11-Hello-World"
+              - generic [ref=f4e43]:
+                - code [ref=f4e44]: 00_Intro_11
+                - generic [ref=f4e45]: Hello World
+              - generic "Solution pending" [ref=f4e46]
+          - button "01 Expressions & Basic Strings 10" [ref=f4e48] [cursor=pointer]:
+            - generic [ref=f4e51]: "01"
+            - strong [ref=f4e52]: Expressions & Basic Strings
+            - generic [ref=f4e53]: "10"
+          - button "02 Conditionals 13" [ref=f4e55] [cursor=pointer]:
+            - generic [ref=f4e58]: "02"
+            - strong [ref=f4e59]: Conditionals
+            - generic [ref=f4e60]: "13"
+          - button "03 Loops & Iteration 15" [ref=f4e62] [cursor=pointer]:
+            - generic [ref=f4e65]: "03"
+            - strong [ref=f4e66]: Loops & Iteration
+            - generic [ref=f4e67]: "15"
+          - button "04 Arrays & Grids 16" [ref=f4e69] [cursor=pointer]:
+            - generic [ref=f4e72]: "04"
+            - strong [ref=f4e73]: Arrays & Grids
+            - generic [ref=f4e74]: "16"
+          - button "05 String Processing 8" [ref=f4e76] [cursor=pointer]:
+            - generic [ref=f4e79]: "05"
+            - strong [ref=f4e80]: String Processing
+            - generic [ref=f4e81]: "8"
+          - button "06 Vectors & Algorithms 15" [ref=f4e83] [cursor=pointer]:
+            - generic [ref=f4e86]: "06"
+            - strong [ref=f4e87]: Vectors & Algorithms
+            - generic [ref=f4e88]: "15"
+          - button "07 Sets 5" [ref=f4e90] [cursor=pointer]:
+            - generic [ref=f4e93]: "07"
+            - strong [ref=f4e94]: Sets
+            - generic [ref=f4e95]: "5"
+          - button "08 Maps & Lookup 11" [ref=f4e97] [cursor=pointer]:
+            - generic [ref=f4e100]: "08"
+            - strong [ref=f4e101]: Maps & Lookup
+            - generic [ref=f4e102]: "11"
+          - button "09 Recursion 10" [ref=f4e104] [cursor=pointer]:
+            - generic [ref=f4e107]: "09"
+            - strong [ref=f4e108]: Recursion
+            - generic [ref=f4e109]: "10"
+          - button "10 Midterm 2023 5" [ref=f4e111] [cursor=pointer]:
+            - generic [ref=f4e114]: "10"
+            - strong [ref=f4e115]: Midterm 2023
+            - generic [ref=f4e116]: "5"
+          - button "11 Midterm 2024 4" [ref=f4e118] [cursor=pointer]:
+            - generic [ref=f4e121]: "11"
+            - strong [ref=f4e122]: Midterm 2024
+            - generic [ref=f4e123]: "4"
+          - button "12 Midterm 2024 Mock Exam 5" [ref=f4e125] [cursor=pointer]:
+            - generic [ref=f4e128]: "12"
+            - strong [ref=f4e129]: Midterm 2024 Mock Exam
+            - generic [ref=f4e130]: "5"
+          - button "13 Final 2023 4" [ref=f4e132] [cursor=pointer]:
+            - generic [ref=f4e135]: "13"
+            - strong [ref=f4e136]: Final 2023
+            - generic [ref=f4e137]: "4"
+          - button "14 Final 2024 4" [ref=f4e139] [cursor=pointer]:
+            - generic [ref=f4e142]: "14"
+            - strong [ref=f4e143]: Final 2024
+            - generic [ref=f4e144]: "4"
+          - button "15 Final 2024 Mock Exam 4" [ref=f4e146] [cursor=pointer]:
+            - generic [ref=f4e149]: "15"
+            - strong [ref=f4e150]: Final 2024 Mock Exam
+            - generic [ref=f4e151]: "4"
+          - button "16 Final 2025 4" [ref=f4e153] [cursor=pointer]:
+            - generic [ref=f4e156]: "16"
+            - strong [ref=f4e157]: Final 2025
+            - generic [ref=f4e158]: "4"
+          - button "17 Ovenbreak 57" [ref=f4e160] [cursor=pointer]:
+            - generic [ref=f4e163]: "17"
+            - strong [ref=f4e164]: Ovenbreak
+            - generic [ref=f4e165]: "57"
+          - button "18 Quizzes 4" [ref=f4e167] [cursor=pointer]:
+            - generic [ref=f4e170]: "18"
+            - strong [ref=f4e171]: Quizzes
+            - generic [ref=f4e172]: "4"
+        - generic [ref=f4e173]:
+          - generic [ref=f4e174]: SYSTEM ONLINE
+          - generic [ref=f4e176]: v1.0.0
+      - main [ref=f4e177]:
+        - generic [ref=f4e178]:
+          - generic [ref=f4e179]:
+            - generic [ref=f4e180]: ●~/cedt/com_prog
+            - generic [ref=f4e181]: overview.exe
+          - generic [ref=f4e182]:
+            - paragraph [ref=f4e183]: $ ./browse-problems --course 2110101
+            - heading "Problem Browser_" [level=1] [ref=f4e184]: ProblemBrowser_
+            - paragraph [ref=f4e185]: Browse course exercises, exam statements, and existing C++ solutions from one focused workspace.
+          - region "Library summary" [ref=f4e186]:
+            - article [ref=f4e187]:
+              - generic [ref=f4e188]: "01"
+              - strong [ref=f4e189]: "195"
+              - generic [ref=f4e190]: PROBLEMS INDEXED
+            - article [ref=f4e191]:
+              - generic [ref=f4e192]: "02"
+              - strong [ref=f4e193]: "19"
+              - generic [ref=f4e194]: TOPICS / EXAMS
+            - article [ref=f4e195]:
+              - generic [ref=f4e196]: "03"
+              - strong [ref=f4e197]: "134"
+              - generic [ref=f4e198]: PDF STATEMENTS
+            - article [ref=f4e199]:
+              - generic [ref=f4e200]: "04"
+              - strong [ref=f4e201]: "167"
+              - generic [ref=f4e202]: C++ SOLUTIONS
+          - generic [ref=f4e203]:
+            - generic [ref=f4e204]:
+              - generic [ref=f4e205]: QUICK_START.md
+              - list [ref=f4e208]:
+                - listitem [ref=f4e209]:
+                  - generic [ref=f4e210]: "01"
+                  - generic [ref=f4e211]:
+                    - strong [ref=f4e212]: Choose a chapter
+                    - paragraph [ref=f4e213]: Expand a topic in the navigation tree.
+                - listitem [ref=f4e214]:
+                  - generic [ref=f4e215]: "02"
+                  - generic [ref=f4e216]:
+                    - strong [ref=f4e217]: Open a problem
+                    - paragraph [ref=f4e218]: Read its statement without leaving the workspace.
+                - listitem [ref=f4e219]:
+                  - generic [ref=f4e220]: "03"
+                  - generic [ref=f4e221]:
+                    - strong [ref=f4e222]: Study the source
+                    - paragraph [ref=f4e223]: Switch to the solution tab when it is available.
+            - generic [ref=f4e224]:
+              - generic [ref=f4e225]: topics.list
+              - generic [ref=f4e228]:
+                - button "00 Introduction 1" [ref=f4e229] [cursor=pointer]:
+                  - generic [ref=f4e230]: "00"
+                  - strong [ref=f4e231]: Introduction
+                  - generic [ref=f4e232]: "1"
+                - button "01 Expressions & Basic Strings 10" [ref=f4e233] [cursor=pointer]:
+                  - generic [ref=f4e234]: "01"
+                  - strong [ref=f4e235]: Expressions & Basic Strings
+                  - generic [ref=f4e236]: "10"
+                - button "02 Conditionals 13" [ref=f4e237] [cursor=pointer]:
+                  - generic [ref=f4e238]: "02"
+                  - strong [ref=f4e239]: Conditionals
+                  - generic [ref=f4e240]: "13"
+                - button "03 Loops & Iteration 15" [ref=f4e241] [cursor=pointer]:
+                  - generic [ref=f4e242]: "03"
+                  - strong [ref=f4e243]: Loops & Iteration
+                  - generic [ref=f4e244]: "15"
+                - button "04 Arrays & Grids 16" [ref=f4e245] [cursor=pointer]:
+                  - generic [ref=f4e246]: "04"
+                  - strong [ref=f4e247]: Arrays & Grids
+                  - generic [ref=f4e248]: "16"
+                - button "05 String Processing 8" [ref=f4e249] [cursor=pointer]:
+                  - generic [ref=f4e250]: "05"
+                  - strong [ref=f4e251]: String Processing
+                  - generic [ref=f4e252]: "8"
+                - button "06 Vectors & Algorithms 15" [ref=f4e253] [cursor=pointer]:
+                  - generic [ref=f4e254]: "06"
+                  - strong [ref=f4e255]: Vectors & Algorithms
+                  - generic [ref=f4e256]: "15"
+                - button "07 Sets 5" [ref=f4e257] [cursor=pointer]:
+                  - generic [ref=f4e258]: "07"
+                  - strong [ref=f4e259]: Sets
+                  - generic [ref=f4e260]: "5"
+                - button "08 Maps & Lookup 11" [ref=f4e261] [cursor=pointer]:
+                  - generic [ref=f4e262]: "08"
+                  - strong [ref=f4e263]: Maps & Lookup
+                  - generic [ref=f4e264]: "11"
+                - button "09 Recursion 10" [ref=f4e265] [cursor=pointer]:
+                  - generic [ref=f4e266]: "09"
+                  - strong [ref=f4e267]: Recursion
+                  - generic [ref=f4e268]: "10"
+                - paragraph [ref=f4e269]: $ select a topic to continue█

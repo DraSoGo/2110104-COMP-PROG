@@ -1,302 +1,121 @@
-# CEDT Computer Programming (Com Prog) Solutions
+# CEDT Problem Atlas
 
-Solutions and problem write-ups for the **Computer Programming** course in **Computer Engineering & Digital Technology (CEDT)** at Chulalongkorn University.
+CEDT Problem Atlas is a static web library for Computer Programming exercises, exams, and C++ solutions. It groups each problem statement and solution in one predictable folder, then builds the site from a generated manifest.
 
----
+## Features
 
-## 📌 Topic Overview
+- Search by problem code, title, or chapter
+- Filter by chapter and resource availability
+- Dedicated problem views with embedded PDFs and source-code display
+- Clear states for missing PDFs, solutions, and testcases
+- Responsive layouts, keyboard focus styles, reduced-motion support, and dark mode
+- Thai and English content support
+- Hash-based routes that work on GitHub Pages without server rewrites
 
-This repository is organized by problem topics covering fundamental programming concepts and data structures in C++:
+## Technology
 
-| Module | Topic | Description |
-| :--- | :--- | :--- |
-| **00_Intro** | Introduction | Basic input/output, setup, and flowchart implementation |
-| **01_Expr** | Expressions & Math | Basic expressions, formula evaluation, and initial string operations |
-| **02_If** | Conditionals | Decision making (`if-else`) and conditional branching flowcharts |
-| **03_Loop** | Loops & Iteration | Repetition patterns, `while`/`for` loops, and pattern printing |
-| **04_Array** | Arrays & Grids | 1D & 2D arrays, matrix manipulation, and grid-based logic |
-| **05_String** | String Processing | String parsing, ciphers, and text manipulations |
-| **06_Vector** | Vectors & Algorithms | Dynamic arrays using `std::vector` and Standard Library algorithms |
-| **07_Set** | Sets | Set operations, distinct elements, and unique value tracking with `std::set` |
-| **08_Map** | Maps & Lookup | Key-value mapping, frequency counting, and associative lookups with `std::map` |
-| **09_Recur** | Recursion | Recursive functions, divide and conquer, and recurrence relations |
+The site uses semantic HTML, CSS, browser JavaScript modules, and Node.js build scripts. It has no runtime framework, backend, database, or package dependency.
 
-You can see problem in this [drive](https://drive.google.com/drive/folders/1VCiYHI-WECqd6qg945ZdfRDbLRb4hxzZ).
+## Folder structure
 
----
+```text
+.
+├── data/problems.json       # generated content manifest
+├── problems/
+│   └── <category>/
+│       └── <code>-<title>/
+│           ├── metadata.json
+│           ├── problem.pdf  # optional
+│           ├── solution.cpp # optional
+│           └── testcase/    # optional, maintained manually
+├── scripts/                 # organizer, indexer, checks, build, server
+├── src/                     # browser application and styles
+├── test/                    # Node test suite
+├── index.html
+└── dist/                    # production build output
+```
 
-## ⭐ Recommend
+The original `Grader/` and `Ovenbreak/` solution trees remain in place. The organizer copied their files into `problems/`; it did not move or rewrite the originals.
 
-It about interesting problem and technic that I use to solve this.
+## Requirements
 
-### 📋 Table of Contents
-- [01\_Expr\_31](#01_expr_31) - Interesting problem
-- [02\_If\_31](#02_if_31) - Function
-- [03\_Loop\_15](#03_loop_15) - Short Hand If Else (Ternary Operator)
-- [03\_Loop\_22](#03_loop_22) - Prime Number (Not max optimize)
-- [03\_Loop\_31](#03_loop_31) - Interesting problem
-- [04\_Array\_14](#04_array_14) - Prefix sum 2d array
-- [04\_Array\_28](#04_array_28) - To lower
-- [04\_Array\_29](#04_array_29) - Struct
-- [04\_Array\_32](#04_array_32) - Interesting Problem
-- [05\_String\_12](#05_string_12) - Interesting Problem
-- [05\_String\_21](#05_string_21) - Is upper,Is lower,Is digit
-- [05\_String\_23](#05_string_23) - Interesting Problem
-- [05\_String\_31](#05_string_31) - Bitwise operator, Is alpha
-- [06\_Vector\_11](#06_vector_11) - Deque
-- [06\_Vector\_14](#06_vector_14) - Set
-- [06\_Vector\_23](#06_vector_23) - Sorting of struct using bool operator
-- [06\_Vector\_32](#06_vector_32) - Custom compare sorting
-- [06\_Vector\_35](#06_vector_35) - Interesting Problem
-- [07\_Set\_11](#07_Set_11) - Multi Set
-- [08\_Map\_21](#08_Map_21) - Interesting Problem
-- [08\_Map\_23](#08_Map_23) - Range-Based for Loop
-- [08\_Map\_26](#08_Map_26) - Interesting Problem
-- [08\_Map\_27](#08_Map_27) - string::npos
-- [08\_Map\_31](#08_Map_31) - Array in Struct
-- [09\_Recur\_33](#09_Recur_33) - DFS by Stack
-- [09\_Recur\_41](#09_Recur_41) - BFS by Queue
+- Node.js 20 or newer
+- `pdftotext` and `pdfinfo` from Poppler only when importing new source PDFs
 
----
+## Local development
 
-### 01_Expr_31
+```bash
+npm run index
+npm run dev
+```
 
-- Interesting problem
+Open `http://localhost:4173`. The development server reads the project files directly.
 
-solution: [code](Grader/01/01_Expr_31.cpp)
+## Tests and production build
 
-source: [doc](https://www.opendurian.com/news/mathcirdec/)
+```bash
+npm test
+npm run lint
+npm run build
+```
 
----
+Run the full verification sequence with:
 
-### 02_If_31
+```bash
+npm run verify
+```
 
-- Function Line[5:14]
-- Leap year
+The production site is written to `dist/`. Preview it with:
 
-solution: [code](Grader/02/02_If_31.cpp)
+```bash
+npm run dev -- --dist
+```
 
-source: [doc](https://www.geeksforgeeks.org/cpp/functions-in-cpp/)
+## Add a category
 
----
+1. Create a filesystem-safe folder under `problems/`, such as `19-dynamic-programming`.
+2. Use the same `category`, `categoryOrder`, and category folder for every problem in that chapter.
+3. Run `npm run index`.
 
-### 03_Loop_15
+## Add a problem
 
-- Short Hand If Else (Ternary Operator) Line[12:12]
+Create `problems/<category>/<problem-code>-<problem-title>/metadata.json`:
 
-solution: [code](Grader/03/03_Loop_15.cpp)
+```json
+{
+  "code": "ABC001",
+  "title": "Sum of Two Numbers",
+  "category": "Introduction",
+  "categoryOrder": 0
+}
+```
 
-source: [doc](https://www.geeksforgeeks.org/cpp/cpp-ternary-or-conditional-operator/)
+Copy the statement to `problem.pdf`, then run `npm run index`. Keep the displayed title in `metadata.json` human-readable. Folder names should use safe characters and hyphens between words.
 
----
+## Add a solution
 
-### 03_Loop_22
+Copy the existing solution into its problem folder as `solution.cpp`. Do not generate a placeholder for an unsolved problem. Run `npm run index` afterward.
 
-- Prime Number (Not max optimize) Line[24:41]
+## Add testcases later
 
-solution: [code](Grader/03/03_Loop_22.cpp)
+Create `testcase/` inside the problem folder and place your files under it without changing their internal names or structure. Run `npm run index` to expose the testcase status on the site.
 
----
+> Testcase content is maintained manually. The scripts do not create, execute, validate, rename, or modify testcase files.
 
-### 03_Loop_31
+## Re-import the supplied PDF collection
 
-- Interesting problem
-- Function pow Line[4:12]
-- Function find digit Line[14:21]
+The organizer defaults to the source path used for this import. You may pass another read-only PDF root:
 
-solution: [code](Grader/03/03_Loop_31.cpp)
+```bash
+npm run organize -- /absolute/path/to/pdf-source
+```
 
----
+The organizer uses exclusive copies. It skips byte-identical destinations and exits with a conflict report when an existing destination differs.
 
-### 04_Array_14
+## GitHub Pages
 
-- Prefix sum 2d array Line[10:26]
+1. Run `npm run build`.
+2. Configure GitHub Pages to publish the contents of `dist/` through your preferred Pages workflow.
+3. Keep `.nojekyll` in the published output.
 
-solution: [code](Grader/04/04_Array_14.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/dsa/prefix-sum-2d-array/),[video](https://www.youtube.com/watch?v=WibxoqMSMCw)
-
----
-
-### 04_Array_28
-
-- To lower Line[13:13]
-
-solution: [code](Grader/04/04_Array_28.cpp)
-
----
-
-### 04_Array_29
-
-- Struct Line[4:7]
-
-solution: [code](Grader/04/04_Array_29.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/structures-in-cpp/)
-
----
-
-### 04_Array_32
-
-- Interesting Problem
-
-solution: [code](Grader/04/04_Array_32.cpp)
-
----
-
-### 05_String_12
-
-- Interesting Problem
-- sum with string Line[2:40]
-
-solution: [code](Grader/05/05_String_12.cpp)
-
----
-
-### 05_String_21
-
-- Is upper,Is lower,Is digit Line[11:11]
-
-solution: [code](Grader/05/05_String_21.cpp)
-
----
-
-### 05_String_23
-
-- Interesting Problem
-- Math[10:19]
-
-solution: [code](Grader/05/05_String_23.cpp)
-
----
-
-### 05_String_31
-
-- Bitwise operator Line[48:49],Line[76:76]
-- isalpha Line[18:18],Line[67,67]
-
-solution: [code](Grader/05/05_String_31.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/cpp-bitwise-operators/),[video](https://www.youtube.com/watch?v=jlQmeyce65Q)
-
----
-
-### 06_Vector_11
-
-- Deque Line[8:8]
-
-solution: [code](Grader/06/06_Vector_11.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/deque-cpp-stl/)
-
----
-
-### 06_Vector_14
-
-- Set Line[7:7]
-
-solution: [code](Grader/06/06_Vector_14.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/set-in-cpp-stl/)
-
----
-
-### 06_Vector_23
-
-- Sorting of struct using bool operator Line[4:25]
-
-solution: [code](Grader/06/06_Vector_23.cpp)
-
-source: [doc](https://www.daniweb.com/programming/software-development/threads/489915/sorting-of-struct-using-bool-operator)
-
----
-
-### 06_Vector_32
-
-- Custom compare sorting Line[4:15]
-
-solution: [code](Grader/06/06_Vector_32.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/comparator-in-cpp/)
-
----
-
-### 06_Vector_35
-
-- Interesting Problem
-
-solution: [code](Grader/06/06_Vector_35.cpp)
-
----
-09_Recur_33
-### 07_Set_11
-
-- Multi Set Line[7:7]
-
-solution: [code](Grader/07/07_Set_11.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/multiset-in-cpp-stl/)
-
----
-
-### 08_Map_21
-
-- Interesting Problem
-- Use vector represent order
-
-solution: [code](Grader/08/08_Map_21.cpp)
-
----
-
-### 08_Map_23
-
-- Range-Based for Loop (For auto) Line[16:19];
-
-solution: [code](Grader/08/08_Map_23.cpp)
-
-source: [doc](https://www.geeksforgeeks.org/cpp/range-based-loop-c/)
-
----
-
-### 08_Map_26
-
-- Interesting Problem
-- Easy Graph
-
-solution: [code](Grader/08/08_Map_26.cpp)
-
----
-
-### 08_Map_27
-
-- string::npos == can't find in string Line[41:41]
-
-solution: [code](Grader/08/08_Map_27.cpp)
-
----
-
-### 08_Map_31
-
-- Array in struct Line[4:13]
-
-solution: [code](Grader/08/08_Map_31.cpp)
-
----
-
-### 09_Recur_33
-
-- DFS by Stack Line[9:30]
-
-solution: [code](Grader/09/09_Recur_33.cpp)
-
-source: [doc1](https://www.geeksforgeeks.org/cpp/stack-in-cpp-stl/),[doc2](https://www.geeksforgeeks.org/dsa/iterative-depth-first-traversal/),[video](https://www.youtube.com/watch?v=pBasV9jlQ0w)
-
----
-
-### 09_Recur_41
-
-- BFS by Queue Line[8:32]
-
-solution: [code](Grader/09/09_Recur_33.cpp)
-
-source: [doc1](https://www.geeksforgeeks.org/cpp/queue-cpp-stl/),[doc2](https://www-geeksforgeeks-org.translate.goog/python/python-program-for-breadth-first-search-or-bfs-for-a-graph/?_x_tr_sl=en&_x_tr_tl=th&_x_tr_hl=th&_x_tr_pto=tc&_x_tr_hist=true),[video](https://www.youtube.com/watch?v=oOlN-qWJzzA)
+All URLs are relative and page navigation uses URL hashes, so the build works from a repository subpath such as `https://username.github.io/repository/`.

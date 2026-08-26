@@ -1,0 +1,103 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "2110101 Computer Programming" [ref=e4] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e5]: "2110101"
+      - generic [ref=e6]: Computer Programming
+    - searchbox "Search problems… ( / )" [ref=e8]
+    - generic [ref=e9]: 150 problems · 1934 test cases
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - navigation [ref=e12]:
+        - button "00 Python Intro 2" [ref=e14] [cursor=pointer]:
+          - generic [ref=e17]: "00"
+          - generic [ref=e18]: Python Intro
+          - generic [ref=e19]: "2"
+        - button "01 Data Type and Expression 8" [ref=e21] [cursor=pointer]:
+          - generic [ref=e24]: "01"
+          - generic [ref=e25]: Data Type and Expression
+          - generic [ref=e26]: "8"
+        - button "02 Basic String and List 11" [ref=e28] [cursor=pointer]:
+          - generic [ref=e31]: "02"
+          - generic [ref=e32]: Basic String and List
+          - generic [ref=e33]: "11"
+        - button "03 Selection 16" [ref=e35] [cursor=pointer]:
+          - generic [ref=e38]: "03"
+          - generic [ref=e39]: Selection
+          - generic [ref=e40]: "16"
+        - button "04 Repetition 15" [ref=e42] [cursor=pointer]:
+          - generic [ref=e45]: "04"
+          - generic [ref=e46]: Repetition
+          - generic [ref=e47]: "15"
+        - button "05 List Processing 14" [ref=e49] [cursor=pointer]:
+          - generic [ref=e52]: "05"
+          - generic [ref=e53]: List Processing
+          - generic [ref=e54]: "14"
+        - button "06 Function 6" [ref=e56] [cursor=pointer]:
+          - generic [ref=e59]: "06"
+          - generic [ref=e60]: Function
+          - generic [ref=e61]: "6"
+        - button "07 String Processing 8" [ref=e63] [cursor=pointer]:
+          - generic [ref=e66]: "07"
+          - generic [ref=e67]: String Processing
+          - generic [ref=e68]: "8"
+        - button "08 Basic Dict 7" [ref=e70] [cursor=pointer]:
+          - generic [ref=e73]: "08"
+          - generic [ref=e74]: Basic Dict
+          - generic [ref=e75]: "7"
+        - button "09 Nested Structure 7" [ref=e77] [cursor=pointer]:
+          - generic [ref=e80]: "09"
+          - generic [ref=e81]: Nested Structure
+          - generic [ref=e82]: "7"
+        - button "10 Tuple Set Dict 11" [ref=e84] [cursor=pointer]:
+          - generic [ref=e87]: "10"
+          - generic [ref=e88]: Tuple Set Dict
+          - generic [ref=e89]: "11"
+        - button "11 NumPy 7" [ref=e91] [cursor=pointer]:
+          - generic [ref=e94]: "11"
+          - generic [ref=e95]: NumPy
+          - generic [ref=e96]: "7"
+        - button "12 Class and Object 8" [ref=e98] [cursor=pointer]:
+          - generic [ref=e101]: "12"
+          - generic [ref=e102]: Class and Object
+          - generic [ref=e103]: "8"
+        - button "P1 Grader 01 Practice 11" [ref=e105] [cursor=pointer]:
+          - generic [ref=e108]: P1
+          - generic [ref=e109]: Grader 01 Practice
+          - generic [ref=e110]: "11"
+        - button "P2 Grader 02 Practice 9" [ref=e112] [cursor=pointer]:
+          - generic [ref=e115]: P2
+          - generic [ref=e116]: Grader 02 Practice
+          - generic [ref=e117]: "9"
+        - button "P3 Grader 03 Practice 10" [ref=e119] [cursor=pointer]:
+          - generic [ref=e122]: P3
+          - generic [ref=e123]: Grader 03 Practice
+          - generic [ref=e124]: "10"
+    - main [ref=e125]:
+      - generic [ref=e126]:
+        - heading "Problem browser" [level=1] [ref=e127]
+        - paragraph [ref=e128]: Every problem from the course, with its statement, the solution, and the full set of test cases the grader runs.
+        - generic [ref=e129]:
+          - generic [ref=e130]:
+            - generic [ref=e131]: "150"
+            - text: problems
+          - generic [ref=e132]:
+            - generic [ref=e133]: "16"
+            - text: topics
+          - generic [ref=e134]:
+            - generic [ref=e135]: "1934"
+            - text: test cases
+          - generic [ref=e136]:
+            - generic [ref=e137]: "150"
+            - text: statements
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - heading "Statement" [level=3] [ref=e140]
+            - paragraph [ref=e141]: The original PDF, embedded — no download needed.
+          - generic [ref=e142]:
+            - heading "Solution" [level=3] [ref=e143]
+            - paragraph [ref=e144]: The Python source, highlighted and one click from your clipboard.
+          - generic [ref=e145]:
+            - heading "Test cases" [level=3] [ref=e146]
+            - paragraph [ref=e147]: Example set and full test set, each input paired with its expected output.
+        - paragraph [ref=e148]: Press / to search · pick a problem from the left to begin
