@@ -63,3 +63,42 @@ export function preserveScrollPosition(getScroller, render) {
   const nextScroller = getScroller();
   if (nextScroller) nextScroller.scrollTop = scrollTop;
 }
+
+function categoryDescriptor(problem) {
+  const order = problem.categoryOrder;
+  if (order <= 9) return { parentId: 'course-topics', parentName: 'Course Topics', parentCode: '00-09', childId: `topic-${order}`, childName: problem.category, childCode: String(order).padStart(2, '0') };
+  if (order <= 12) {
+    const child = order === 10 ? ['2023', '2023'] : order === 11 ? ['2024', '2024'] : ['mock', 'Mock Exam'];
+    return { parentId: 'midterm', parentName: 'Midterm', parentCode: 'MID', childId: `midterm-${child[0]}`, childName: child[1], childCode: order === 12 ? 'M' : child[1].slice(-2) };
+  }
+  if (order <= 16) {
+    const child = order === 13 ? ['2023', '2023'] : order === 14 ? ['2024', '2024'] : order === 15 ? ['mock', 'Mock Exam'] : ['2025', '2025'];
+    return { parentId: 'final', parentName: 'Final', parentCode: 'FIN', childId: `final-${child[0]}`, childName: child[1], childCode: order === 15 ? 'M' : child[1].slice(-2) };
+  }
+  const isQuiz = order === 18;
+  return { parentId: 'ovenbreak', parentName: 'Ovenbreak', parentCode: 'OVN', childId: isQuiz ? 'ovenbreak-quiz' : 'ovenbreak-final', childName: isQuiz ? 'Quiz' : 'Final', childCode: isQuiz ? 'Q' : 'F' };
+}
+
+export function buildCategoryTree(problems) {
+  const parents = new Map();
+  for (const problem of problems) {
+    const descriptor = categoryDescriptor(problem);
+    if (!parents.has(descriptor.parentId)) parents.set(descriptor.parentId, { id: descriptor.parentId, name: descriptor.parentName, code: descriptor.parentCode, order: problem.categoryOrder, children: [] });
+    const parent = parents.get(descriptor.parentId);
+    let child = parent.children.find((item) => item.id === descriptor.childId);
+    if (!child) {
+      child = { id: descriptor.childId, name: descriptor.childName, code: descriptor.childCode, category: problem.category, order: problem.categoryOrder, problems: [] };
+      parent.children.push(child);
+    }
+    child.problems.push(problem);
+    parent.order = Math.min(parent.order, problem.categoryOrder);
+  }
+  return [...parents.values()]
+    .sort((a, b) => a.order - b.order)
+    .map((parent) => ({ ...parent, children: parent.children.sort((a, b) => a.order - b.order).map((child) => ({ ...child, problems: child.problems.sort((a, b) => a.code.localeCompare(b.code)) })) }));
+}
+
+export function problemCategoryPath(problem) {
+  const descriptor = categoryDescriptor(problem);
+  return [descriptor.parentName, descriptor.childName];
+}

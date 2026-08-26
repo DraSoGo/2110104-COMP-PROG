@@ -1,0 +1,182 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link ">_ 2110101 COMPUTER PROGRAMMING" [ref=e5] [cursor=pointer]:
+        - /url: "#/"
+        - generic [ref=e6]: ">_"
+        - generic [ref=e7]:
+          - strong [ref=e8]: "2110101"
+          - generic [ref=e9]: COMPUTER PROGRAMMING
+      - generic [ref=e10]:
+        - generic [ref=e14]: Search problems
+        - searchbox "Search problems /" [ref=e15]
+        - generic [ref=e16]: /
+      - generic [ref=e18]:
+        - text: "195"
+        - generic [ref=e19]: PROBLEMS
+      - button "Toggle color theme" [ref=e20] [cursor=pointer]
+    - generic [ref=e23]:
+      - complementary "Problem navigation" [ref=e24]:
+        - generic [ref=e25]:
+          - text: //
+          - generic [ref=e26]: COURSE_INDEX
+        - navigation [ref=e27]:
+          - generic [ref=e28]:
+            - button "00-09 Course Topics 104" [expanded] [ref=e29] [cursor=pointer]:
+              - generic [ref=e32]: 00-09
+              - strong [ref=e33]: Course Topics
+              - generic [ref=e34]: "104"
+            - generic [ref=e35]:
+              - generic [ref=e36]:
+                - button "00 Introduction 1" [expanded] [ref=e37] [cursor=pointer]:
+                  - generic [ref=e40]: "00"
+                  - strong [ref=e41]: Introduction
+                  - generic [ref=e42]: "1"
+                - link "00_Intro_11 Hello World Solution pending" [ref=e44] [cursor=pointer]:
+                  - /url: "#/problem/00-introduction%2F00_Intro_11-Hello-World"
+                  - generic [ref=e46]:
+                    - code [ref=e47]: 00_Intro_11
+                    - generic [ref=e48]: Hello World
+                  - generic "Solution pending" [ref=e49]
+              - button "01 Expressions & Basic Strings 10" [ref=e51] [cursor=pointer]:
+                - generic [ref=e54]: "01"
+                - strong [ref=e55]: Expressions & Basic Strings
+                - generic [ref=e56]: "10"
+              - button "02 Conditionals 13" [ref=e58] [cursor=pointer]:
+                - generic [ref=e61]: "02"
+                - strong [ref=e62]: Conditionals
+                - generic [ref=e63]: "13"
+              - button "03 Loops & Iteration 15" [ref=e65] [cursor=pointer]:
+                - generic [ref=e68]: "03"
+                - strong [ref=e69]: Loops & Iteration
+                - generic [ref=e70]: "15"
+              - button "04 Arrays & Grids 16" [ref=e72] [cursor=pointer]:
+                - generic [ref=e75]: "04"
+                - strong [ref=e76]: Arrays & Grids
+                - generic [ref=e77]: "16"
+              - button "05 String Processing 8" [ref=e79] [cursor=pointer]:
+                - generic [ref=e82]: "05"
+                - strong [ref=e83]: String Processing
+                - generic [ref=e84]: "8"
+              - button "06 Vectors & Algorithms 15" [ref=e86] [cursor=pointer]:
+                - generic [ref=e89]: "06"
+                - strong [ref=e90]: Vectors & Algorithms
+                - generic [ref=e91]: "15"
+              - button "07 Sets 5" [ref=e93] [cursor=pointer]:
+                - generic [ref=e96]: "07"
+                - strong [ref=e97]: Sets
+                - generic [ref=e98]: "5"
+              - button "08 Maps & Lookup 11" [ref=e100] [cursor=pointer]:
+                - generic [ref=e103]: "08"
+                - strong [ref=e104]: Maps & Lookup
+                - generic [ref=e105]: "11"
+              - button "09 Recursion 10" [ref=e107] [cursor=pointer]:
+                - generic [ref=e110]: "09"
+                - strong [ref=e111]: Recursion
+                - generic [ref=e112]: "10"
+          - button "MID Midterm 14" [ref=e114] [cursor=pointer]:
+            - generic [ref=e117]: MID
+            - strong [ref=e118]: Midterm
+            - generic [ref=e119]: "14"
+          - button "FIN Final 16" [ref=e121] [cursor=pointer]:
+            - generic [ref=e124]: FIN
+            - strong [ref=e125]: Final
+            - generic [ref=e126]: "16"
+          - button "OVN Ovenbreak 61" [ref=e128] [cursor=pointer]:
+            - generic [ref=e131]: OVN
+            - strong [ref=e132]: Ovenbreak
+            - generic [ref=e133]: "61"
+        - generic [ref=e134]:
+          - generic [ref=e135]: SYSTEM ONLINE
+          - generic [ref=e137]: v1.0.0
+      - main [ref=e138]:
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - generic [ref=e141]: ●~/cedt/com_prog
+            - generic [ref=e142]: overview.exe
+          - generic [ref=e143]:
+            - paragraph [ref=e144]: $ ./browse-problems --course 2110101
+            - heading "Problem Browser_" [level=1] [ref=e145]: ProblemBrowser_
+            - paragraph [ref=e146]: Browse course exercises, exam statements, and existing C++ solutions from one focused workspace.
+          - region "Library summary" [ref=e147]:
+            - article [ref=e148]:
+              - generic [ref=e149]: "01"
+              - strong [ref=e150]: "195"
+              - generic [ref=e151]: PROBLEMS INDEXED
+            - article [ref=e152]:
+              - generic [ref=e153]: "02"
+              - strong [ref=e154]: "19"
+              - generic [ref=e155]: TOPICS / EXAMS
+            - article [ref=e156]:
+              - generic [ref=e157]: "03"
+              - strong [ref=e158]: "134"
+              - generic [ref=e159]: PDF STATEMENTS
+            - article [ref=e160]:
+              - generic [ref=e161]: "04"
+              - strong [ref=e162]: "167"
+              - generic [ref=e163]: C++ SOLUTIONS
+          - generic [ref=e164]:
+            - generic [ref=e165]:
+              - generic [ref=e166]: QUICK_START.md
+              - list [ref=e169]:
+                - listitem [ref=e170]:
+                  - generic [ref=e171]: "01"
+                  - generic [ref=e172]:
+                    - strong [ref=e173]: Choose a chapter
+                    - paragraph [ref=e174]: Expand a topic in the navigation tree.
+                - listitem [ref=e175]:
+                  - generic [ref=e176]: "02"
+                  - generic [ref=e177]:
+                    - strong [ref=e178]: Open a problem
+                    - paragraph [ref=e179]: Read its statement without leaving the workspace.
+                - listitem [ref=e180]:
+                  - generic [ref=e181]: "03"
+                  - generic [ref=e182]:
+                    - strong [ref=e183]: Study the source
+                    - paragraph [ref=e184]: Switch to the solution tab when it is available.
+            - generic [ref=e185]:
+              - generic [ref=e186]: topics.list
+              - generic [ref=e189]:
+                - button "00 Introduction 1" [ref=e190] [cursor=pointer]:
+                  - generic [ref=e191]: "00"
+                  - strong [ref=e192]: Introduction
+                  - generic [ref=e193]: "1"
+                - button "01 Expressions & Basic Strings 10" [ref=e194] [cursor=pointer]:
+                  - generic [ref=e195]: "01"
+                  - strong [ref=e196]: Expressions & Basic Strings
+                  - generic [ref=e197]: "10"
+                - button "02 Conditionals 13" [ref=e198] [cursor=pointer]:
+                  - generic [ref=e199]: "02"
+                  - strong [ref=e200]: Conditionals
+                  - generic [ref=e201]: "13"
+                - button "03 Loops & Iteration 15" [ref=e202] [cursor=pointer]:
+                  - generic [ref=e203]: "03"
+                  - strong [ref=e204]: Loops & Iteration
+                  - generic [ref=e205]: "15"
+                - button "04 Arrays & Grids 16" [ref=e206] [cursor=pointer]:
+                  - generic [ref=e207]: "04"
+                  - strong [ref=e208]: Arrays & Grids
+                  - generic [ref=e209]: "16"
+                - button "05 String Processing 8" [ref=e210] [cursor=pointer]:
+                  - generic [ref=e211]: "05"
+                  - strong [ref=e212]: String Processing
+                  - generic [ref=e213]: "8"
+                - button "06 Vectors & Algorithms 15" [ref=e214] [cursor=pointer]:
+                  - generic [ref=e215]: "06"
+                  - strong [ref=e216]: Vectors & Algorithms
+                  - generic [ref=e217]: "15"
+                - button "07 Sets 5" [ref=e218] [cursor=pointer]:
+                  - generic [ref=e219]: "07"
+                  - strong [ref=e220]: Sets
+                  - generic [ref=e221]: "5"
+                - button "08 Maps & Lookup 11" [ref=e222] [cursor=pointer]:
+                  - generic [ref=e223]: "08"
+                  - strong [ref=e224]: Maps & Lookup
+                  - generic [ref=e225]: "11"
+                - button "09 Recursion 10" [ref=e226] [cursor=pointer]:
+                  - generic [ref=e227]: "09"
+                  - strong [ref=e228]: Recursion
+                  - generic [ref=e229]: "10"
+                - paragraph [ref=e230]: $ select a topic to continue█

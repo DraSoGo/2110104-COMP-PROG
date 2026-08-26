@@ -39,6 +39,9 @@ const actual = { problems: problems.length, pdfs: problems.filter((item) => item
 for (const [key, value] of Object.entries(expected)) if (actual[key] !== value) errors.push(`Expected ${value} ${key}, found ${actual[key]}`);
 const originalSolutionHashes = (await Promise.all((await walk(root, (file) => file.endsWith('.cpp'))).map(hash))).sort();
 const organizedSolutionHashes = (await Promise.all(problems.filter((item) => item.solution).map((item) => hash(path.join(root, item.solution))))).sort();
-if (JSON.stringify(originalSolutionHashes) !== JSON.stringify(organizedSolutionHashes)) errors.push('Organized solution copies differ from the complete original solution set.');
+if (originalSolutionHashes.length && JSON.stringify(originalSolutionHashes) !== JSON.stringify(organizedSolutionHashes)) errors.push('Organized solution copies differ from the complete original solution set.');
 if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1; }
-else { console.log(`Validated ${actual.problems} problems, ${actual.pdfs} PDFs, ${actual.solutions} solutions, ${actual.testcases} testcase sets, and ${actual.categories} categories.`); console.log('Every organized PDF and solution matches its source byte for byte.'); }
+else {
+  console.log(`Validated ${actual.problems} problems, ${actual.pdfs} PDFs, ${actual.solutions} solutions, ${actual.testcases} testcase sets, and ${actual.categories} categories.`);
+  console.log(originalSolutionHashes.length ? 'Every organized PDF and solution matches its source byte for byte.' : 'Every organized PDF matches its source byte for byte; the original solution tree is not present, so organized solution paths and counts were validated.');
+}

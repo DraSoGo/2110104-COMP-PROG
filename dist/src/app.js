@@ -1,4 +1,4 @@
-import { adjacentProblems, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, summarizeProblems } from './lib/content.js';
+import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
 
 const app = document.querySelector('#app');
 const state = { problems: [], query: '', openCategories: new Set(), closedCategories: new Set(), sidebarOpen: false };
@@ -31,24 +31,37 @@ function categoryCode(group) {
 
 function sidebarMarkup() {
   const filtered = filterProblems(state.problems, { query: state.query });
-  const groups = groupProblemsByCategory(state.problems);
+  const tree = buildCategoryTree(state.problems);
   const active = activeProblem();
+  const activeNodes = new Set();
+  for (const parent of tree) for (const child of parent.children) if (child.problems.some((problem) => problem.id === active?.id)) { activeNodes.add(parent.id); activeNodes.add(child.id); }
+  const isOpen = (id) => categoryIsOpen({ category: id, activeCategory: activeNodes.has(id) ? id : null, query: state.query, openCategories: state.openCategories, closedCategories: state.closedCategories });
   return `<aside class="sidebar ${state.sidebarOpen ? 'is-open' : ''}" aria-label="Problem navigation">
     <div class="sidebar-head"><span>COURSE_INDEX</span><button class="sidebar-close" type="button" aria-label="Close problem navigation">×</button></div>
     <nav class="course-tree" id="course-tree">
-      ${groups.map((group) => {
-        const visible = group.problems.filter((problem) => filtered.includes(problem));
-        if (state.query && !visible.length) return '';
-        const isOpen = categoryIsOpen({ category: group.name, activeCategory: active?.category, query: state.query, openCategories: state.openCategories, closedCategories: state.closedCategories });
-        return `<section class="tree-group ${isOpen ? 'open' : ''}">
-          <button class="tree-heading" type="button" data-category="${escapeHtml(group.name)}" aria-expanded="${isOpen}">
-            ${icon('chevron')}<span class="tree-code">${categoryCode(group)}</span><strong>${escapeHtml(group.name)}</strong><span class="tree-count">${visible.length || group.problems.length}</span>
+      ${tree.map((parent) => {
+        const visibleChildren = parent.children.map((child) => ({ ...child, visible: child.problems.filter((problem) => filtered.includes(problem)) })).filter((child) => !state.query || child.visible.length);
+        if (!visibleChildren.length) return '';
+        const parentOpen = isOpen(parent.id);
+        const parentCount = visibleChildren.reduce((count, child) => count + (state.query ? child.visible.length : child.problems.length), 0);
+        return `<section class="tree-group tree-parent ${parentOpen ? 'open' : ''}">
+          <button class="tree-heading tree-parent-heading" type="button" data-node="${parent.id}" aria-expanded="${parentOpen}">
+            ${icon('chevron')}<span class="tree-code">${escapeHtml(parent.code)}</span><strong>${escapeHtml(parent.name)}</strong><span class="tree-count">${parentCount}</span>
           </button>
-          <div class="tree-problems" ${isOpen ? '' : 'hidden'}>
-            ${(state.query ? visible : group.problems).map((problem) => `<a class="tree-problem ${active?.id === problem.id ? 'active' : ''}" href="#/problem/${encodeURIComponent(problem.id)}">
-              <span class="tree-line"></span><span><code>${escapeHtml(problem.code)}</code><small>${escapeHtml(problem.title)}</small></span>
-              <span class="mini-status ${problem.solution ? 'has-solution' : ''}" title="${problem.solution ? 'Solution available' : 'Solution pending'}"></span>
-            </a>`).join('')}
+          <div class="tree-children" ${parentOpen ? '' : 'hidden'}>
+            ${visibleChildren.map((child) => {
+              const childOpen = isOpen(child.id);
+              const problems = state.query ? child.visible : child.problems;
+              return `<section class="tree-child ${childOpen ? 'open' : ''}">
+                <button class="tree-heading tree-child-heading" type="button" data-node="${child.id}" data-category="${escapeHtml(child.category)}" aria-expanded="${childOpen}">
+                  ${icon('chevron')}<span class="tree-code">${escapeHtml(child.code)}</span><strong>${escapeHtml(child.name)}</strong><span class="tree-count">${problems.length}</span>
+                </button>
+                <div class="tree-problems" ${childOpen ? '' : 'hidden'}>${problems.map((problem) => `<a class="tree-problem ${active?.id === problem.id ? 'active' : ''}" href="#/problem/${encodeURIComponent(problem.id)}">
+                  <span class="tree-line"></span><span><code>${escapeHtml(problem.code)}</code><small>${escapeHtml(problem.title)}</small></span>
+                  <span class="mini-status ${problem.solution ? 'has-solution' : ''}" title="${problem.solution ? 'Solution available' : 'Solution pending'}"></span>
+                </a>`).join('')}</div>
+              </section>`;
+            }).join('')}
           </div>
         </section>`;
       }).join('')}
@@ -99,9 +112,10 @@ function emptyResource(kind, title, message) {
 function problemMarkup(problem) {
   const ordered = groupProblemsByCategory(state.problems).flatMap((group) => group.problems);
   const adjacent = adjacentProblems(ordered, problem.id);
+  const categoryPath = problemCategoryPath(problem);
   return `<div class="problem-view view-enter">
     <div class="terminal-label"><span>~/problems/${escapeHtml(problem.categorySlug)}</span><span>${escapeHtml(problem.code)}</span></div>
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="#/">ROOT</a><span>/</span><button type="button" data-jump="${escapeHtml(problem.category)}">${escapeHtml(problem.category)}</button><span>/</span><strong>${escapeHtml(problem.code)}</strong></nav>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="#/">ROOT</a><span>/</span><button type="button" data-jump="${escapeHtml(problem.category)}">${escapeHtml(categoryPath[0])}</button><span>/</span><button type="button" data-jump="${escapeHtml(problem.category)}">${escapeHtml(categoryPath[1])}</button><span>/</span><strong>${escapeHtml(problem.code)}</strong></nav>
     <header class="problem-head">
       <div><code>${escapeHtml(problem.code)}</code><h1>${escapeHtml(problem.title)}</h1></div>
       <div class="artifact-status">${resourceDot(problem.pdf, 'PDF')}${resourceDot(problem.solution, 'SOLUTION')}${resourceDot(problem.testcase, 'TESTCASE')}</div>
@@ -164,8 +178,8 @@ function updateSidebar() {
 }
 
 function bindSidebar() {
-  document.querySelectorAll('.tree-heading').forEach((button) => button.addEventListener('click', () => {
-    const category = button.dataset.category;
+  document.querySelectorAll('.tree-heading[data-node]').forEach((button) => button.addEventListener('click', () => {
+    const category = button.dataset.node;
     if (button.getAttribute('aria-expanded') === 'true') {
       state.openCategories.delete(category);
       state.closedCategories.add(category);
@@ -182,13 +196,15 @@ function bindSidebar() {
 }
 
 function jumpToCategory(category) {
-  state.closedCategories.delete(category);
-  state.openCategories.add(category);
+  const tree = buildCategoryTree(state.problems);
+  const parent = tree.find((node) => node.children.some((child) => child.category === category));
+  const child = parent?.children.find((node) => node.category === category);
+  for (const id of [parent?.id, child?.id].filter(Boolean)) { state.closedCategories.delete(id); state.openCategories.add(id); }
   state.query = '';
   state.sidebarOpen = matchMedia('(max-width: 760px)').matches;
   document.querySelector('#global-search').value = '';
   updateSidebar();
-  document.querySelector(`.tree-heading[data-category="${CSS.escape(category)}"]`)?.scrollIntoView({ block: 'center' });
+  document.querySelector(`.tree-child-heading[data-category="${CSS.escape(category)}"]`)?.scrollIntoView({ block: 'center' });
 }
 
 function bindView(problem) {
@@ -216,7 +232,9 @@ async function boot() {
     const response = await fetch(asset('data/problems.json'));
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     state.problems = await response.json();
-    state.openCategories.add(state.problems[0]?.category);
+    const firstParent = buildCategoryTree(state.problems)[0];
+    state.openCategories.add(firstParent?.id);
+    state.openCategories.add(firstParent?.children[0]?.id);
     app.className = 'app-shell';
     app.removeAttribute('role');
     app.innerHTML = shellMarkup();

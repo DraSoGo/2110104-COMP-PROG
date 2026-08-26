@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { adjacentProblems, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, slugify, summarizeProblems } from '../src/lib/content.js';
+import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, problemCategoryPath, slugify, summarizeProblems } from '../src/lib/content.js';
 
 test('slugify keeps problem codes readable and makes Thai-safe folder names', () => {
   assert.equal(slugify('04_Array_23', 'ค่าเหยียบแผ่นดิน'), '04_Array_23-ค่าเหยียบแผ่นดิน');
@@ -58,4 +58,29 @@ test('preserveScrollPosition restores scroll after a sidebar element is replaced
   let scroller = { scrollTop: 133 };
   preserveScrollPosition(() => scroller, () => { scroller = { scrollTop: 0 }; });
   assert.equal(scroller.scrollTop, 133);
+});
+
+test('buildCategoryTree creates nested course, exam, and Ovenbreak groups', () => {
+  const problems = [
+    { code: '01_A', category: 'Expressions & Basic Strings', categoryOrder: 1 },
+    { code: 'M23', category: 'Midterm 2023', categoryOrder: 10 },
+    { code: 'M24', category: 'Midterm 2024', categoryOrder: 11 },
+    { code: 'MM', category: 'Midterm 2024 Mock Exam', categoryOrder: 12 },
+    { code: 'F25', category: 'Final 2025', categoryOrder: 16 },
+    { code: 'OV', category: 'Ovenbreak', categoryOrder: 17 },
+    { code: 'QZ', category: 'Quizzes', categoryOrder: 18 },
+  ];
+  const tree = buildCategoryTree(problems);
+  assert.deepEqual(tree.map((node) => [node.name, node.children.map((child) => child.name)]), [
+    ['Course Topics', ['Expressions & Basic Strings']],
+    ['Midterm', ['2023', '2024', 'Mock Exam']],
+    ['Final', ['2025']],
+    ['Ovenbreak', ['Final', 'Quiz']],
+  ]);
+});
+
+test('problemCategoryPath returns parent and child breadcrumb labels', () => {
+  assert.deepEqual(problemCategoryPath({ category: 'Midterm 2024', categoryOrder: 11 }), ['Midterm', '2024']);
+  assert.deepEqual(problemCategoryPath({ category: 'Ovenbreak', categoryOrder: 17 }), ['Ovenbreak', 'Final']);
+  assert.deepEqual(problemCategoryPath({ category: 'Quizzes', categoryOrder: 18 }), ['Ovenbreak', 'Quiz']);
 });
