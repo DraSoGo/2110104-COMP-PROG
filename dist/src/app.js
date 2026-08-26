@@ -1,4 +1,5 @@
 import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
+import { resolveRecommendations } from './lib/recommendations.js';
 
 const app = document.querySelector('#app');
 const state = { problems: [], query: '', openCategories: new Set(), closedCategories: new Set(), sidebarOpen: false };
@@ -27,6 +28,37 @@ function resourceDot(available, label) { return `<span class="resource-dot ${ava
 function categoryCode(group) {
   const prefix = group.problems[0]?.categorySlug.match(/^([0-9]+)/)?.[1] || '--';
   return prefix.padStart(2, '0');
+}
+
+function recommendationsMarkup() {
+  const items = resolveRecommendations(state.problems);
+  const tracks = [...new Set(items.map((item) => item.track))];
+  return `<section class="recommendations" aria-labelledby="recommendations-title">
+    <header class="recommendations-head">
+      <div><p><span>★</span> CURATED_FROM_LEGACY_README</p><h2 id="recommendations-title">Recommended<br><em>practice paths</em></h2></div>
+      <div class="recommendations-summary"><strong>${items.length}</strong><span>HAND-PICKED<br>PROBLEMS</span></div>
+    </header>
+    <p class="recommendations-intro">โจทย์ที่น่าสนใจและเทคนิคสำคัญจาก README เดิม เรียงเป็นเส้นทางฝึก พร้อมเอกสารและวิดีโอสำหรับเรียนก่อนลงมือทำ</p>
+    <div class="learning-tracks">
+      ${tracks.map((track, trackIndex) => {
+        const trackItems = items.filter((item) => item.track === track);
+        return `<details class="learning-track" ${trackIndex === 0 ? 'open' : ''}>
+          <summary><span class="track-index">0${trackIndex + 1}</span><strong>${escapeHtml(track)}</strong><span class="track-line"></span><small>${trackItems.length} MODULES</small>${icon('chevron')}</summary>
+          <div class="recommendation-grid">
+            ${trackItems.map((item, itemIndex) => `<article class="recommendation-card ${item.problem ? '' : 'resource-only'}">
+              <div class="recommendation-meta"><code>${escapeHtml(item.code)}</code><span>${String(itemIndex + 1).padStart(2, '0')}</span></div>
+              <h3>${item.title ? escapeHtml(item.title) : `<span aria-label="Problem title unavailable">${escapeHtml(item.code)}</span>`}</h3>
+              <p>${escapeHtml(item.technique)}</p>
+              <div class="recommendation-actions">
+                ${item.problem ? `<a class="problem-action" href="#/problem/${encodeURIComponent(item.problem.id)}">OPEN PROBLEM <span aria-hidden="true">→</span></a>` : '<span class="missing-action">PROBLEM NOT INDEXED</span>'}
+                ${(item.resources || []).map((resource) => `<a class="learn-action" href="${escapeHtml(resource.url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(resource.label)}">${escapeHtml(resource.type)} ${icon('external')}<span class="sr-only">: ${escapeHtml(resource.label)} (opens in a new tab)</span></a>`).join('')}
+              </div>
+            </article>`).join('')}
+          </div>
+        </details>`;
+      }).join('')}
+    </div>
+  </section>`;
 }
 
 function sidebarMarkup() {
@@ -102,6 +134,7 @@ function overviewMarkup() {
       <div class="quick-start"><div class="panel-title"><span>QUICK_START.md</span><i></i></div><ol><li><span>01</span><div><strong>Choose a chapter</strong><p>Expand a topic in the navigation tree.</p></div></li><li><span>02</span><div><strong>Open a problem</strong><p>Read its statement without leaving the workspace.</p></div></li><li><span>03</span><div><strong>Study the source</strong><p>Switch to the solution tab when it is available.</p></div></li></ol></div>
       <div class="topic-terminal"><div class="panel-title"><span>topics.list</span><i></i></div><div class="terminal-body">${groups.slice(0,10).map((group) => `<button type="button" data-jump="${escapeHtml(group.name)}"><span>${categoryCode(group)}</span><strong>${escapeHtml(group.name)}</strong><small>${group.problems.length}</small></button>`).join('')}<p><span>$</span> select a topic to continue<span class="cursor">█</span></p></div></div>
     </section>
+    ${recommendationsMarkup()}
   </div>`;
 }
 

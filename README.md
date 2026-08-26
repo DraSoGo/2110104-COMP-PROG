@@ -7,6 +7,7 @@ CEDT Problem Atlas is a static web library for Computer Programming exercises, e
 - Search by problem code, title, or chapter
 - Filter by chapter and resource availability
 - Dedicated problem views with embedded PDFs and source-code display
+- Curated practice paths with technique notes and external learning resources
 - Clear states for missing PDFs, solutions, and testcases
 - Responsive layouts, keyboard focus styles, reduced-motion support, and dark mode
 - Thai and English content support
@@ -29,7 +30,10 @@ The site uses semantic HTML, CSS, browser JavaScript modules, and Node.js build 
 │           ├── solution.cpp # optional
 │           └── testcase/    # optional, maintained manually
 ├── scripts/                 # organizer, indexer, checks, build, server
-├── src/                     # browser application and styles
+├── src/
+│   ├── lib/recommendations.js # curated practice and tutorial links
+│   ├── app.js               # browser application
+│   └── styles.css
 ├── test/                    # Node test suite
 ├── index.html
 └── dist/                    # production build output
@@ -101,6 +105,10 @@ Copy the existing solution into its problem folder as `solution.cpp`. Do not gen
 Create `testcase/` inside the problem folder and place your files under it without changing their internal names or structure. Run `npm run index` to expose the testcase status on the site.
 
 > Testcase content is maintained manually. The scripts do not create, execute, validate, rename, or modify testcase files.
+
+## Update recommended practice
+
+Edit `src/lib/recommendations.js` to add or update a recommended problem, its highlighted technique, learning track, and optional `DOC` or `VIDEO` links. Use an existing problem code to link the card to its problem view. Entries without a matching problem remain visible as learning resources and are marked `PROBLEM NOT INDEXED`.
 
 ## Re-import the supplied PDF collection
 
