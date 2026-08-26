@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, problemCategoryPath, slugify, summarizeProblems } from '../src/lib/content.js';
+import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, pageRoute, preserveScrollPosition, problemCategoryPath, slugify, summarizeProblems } from '../src/lib/content.js';
 
 test('slugify keeps problem codes readable and makes Thai-safe folder names', () => {
   assert.equal(slugify('04_Array_23', 'ค่าเหยียบแผ่นดิน'), '04_Array_23-ค่าเหยียบแผ่นดิน');
@@ -83,4 +83,10 @@ test('problemCategoryPath returns parent and child breadcrumb labels', () => {
   assert.deepEqual(problemCategoryPath({ category: 'Midterm 2024', categoryOrder: 11 }), ['Midterm', '2024']);
   assert.deepEqual(problemCategoryPath({ category: 'Ovenbreak', categoryOrder: 17 }), ['Ovenbreak', 'Grader']);
   assert.deepEqual(problemCategoryPath({ category: 'Quizzes', categoryOrder: 18 }), ['Ovenbreak', 'Quiz']);
+});
+
+test('pageRoute distinguishes overview, recommendations, and problem routes', () => {
+  assert.deepEqual(pageRoute('#/'), { page: 'overview', problemId: null });
+  assert.deepEqual(pageRoute('#/recommended'), { page: 'recommended', problemId: null });
+  assert.deepEqual(pageRoute('#/problem/04-arrays%2F04_Array_14'), { page: 'problem', problemId: '04-arrays/04_Array_14' });
 });

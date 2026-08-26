@@ -1,5 +1,5 @@
 export const recommendations = [
-  { code: '01_Expr_31', track: 'FOUNDATIONS', technique: 'Interesting math problem', resources: [{ type: 'DOC', label: 'Circular math', url: 'https://www.opendurian.com/news/mathcirdec/' }] },
+  { code: '01_Str_31', track: 'FOUNDATIONS', technique: 'Interesting math problem', resources: [{ type: 'DOC', label: 'Circular math', url: 'https://www.opendurian.com/news/mathcirdec/' }] },
   { code: '02_If_31', track: 'FOUNDATIONS', technique: 'Functions and leap-year logic', resources: [{ type: 'DOC', label: 'C++ functions', url: 'https://www.geeksforgeeks.org/cpp/functions-in-cpp/' }] },
   { code: '03_Loop_15', track: 'FOUNDATIONS', technique: 'Ternary operator', resources: [{ type: 'DOC', label: 'Conditional operator', url: 'https://www.geeksforgeeks.org/cpp/cpp-ternary-or-conditional-operator/' }] },
   { code: '03_Loop_22', track: 'FOUNDATIONS', technique: 'Prime factorization' },

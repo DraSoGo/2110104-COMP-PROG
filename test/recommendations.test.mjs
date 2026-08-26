@@ -10,11 +10,11 @@ test('recommendations preserve every code from the legacy README without duplica
   assert.equal(new Set(recommendations.map((item) => item.code)).size, 26);
 });
 
-test('recommendations resolve indexed problems and preserve the one resource-only entry', () => {
+test('all recommendations resolve to indexed problems, including 01_Str_31', () => {
   const resolved = resolveRecommendations(problems);
-  assert.equal(resolved.filter((item) => item.problem).length, 25);
-  assert.deepEqual(resolved.filter((item) => !item.problem).map((item) => item.code), ['01_Expr_31']);
-  assert.equal(resolved.find((item) => item.code === '01_Expr_31').title, null);
+  assert.equal(resolved.filter((item) => item.problem).length, 26);
+  assert.deepEqual(resolved.filter((item) => !item.problem), []);
+  assert.equal(resolved.find((item) => item.code === '01_Str_31').title, 'Decimal → Fraction');
 });
 
 test('external learning resources use secure web links and known resource types', () => {

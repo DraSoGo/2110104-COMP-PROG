@@ -9,6 +9,12 @@ export function slugify(code, title) {
   return safeTitle ? `${safeCode}-${safeTitle}` : safeCode;
 }
 
+export function pageRoute(hash) {
+  if (hash === '#/recommended') return { page: 'recommended', problemId: null };
+  if (hash.startsWith('#/problem/')) return { page: 'problem', problemId: decodeURIComponent(hash.slice(10)) };
+  return { page: 'overview', problemId: null };
+}
+
 export function filterProblems(problems, filters = {}) {
   const query = (filters.query || '').trim().toLocaleLowerCase();
   return problems.filter((problem) => {

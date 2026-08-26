@@ -1,4 +1,4 @@
-import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
+import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, pageRoute, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
 import { resolveRecommendations } from './lib/recommendations.js';
 
 const app = document.querySelector('#app');
@@ -21,7 +21,7 @@ function escapeHtml(value) {
 }
 
 function asset(path) { return new URL(`../${path}`, import.meta.url).href; }
-function routeId() { return location.hash.startsWith('#/problem/') ? decodeURIComponent(location.hash.slice(10)) : null; }
+function routeId() { return pageRoute(location.hash).problemId; }
 function activeProblem() { return state.problems.find((problem) => problem.id === routeId()) || null; }
 function resourceDot(available, label) { return `<span class="resource-dot ${available ? 'ready' : ''}" title="${escapeHtml(label)}"><span></span>${escapeHtml(label)}</span>`; }
 
@@ -38,7 +38,7 @@ function recommendationsMarkup() {
       <div><p><span>★</span> CURATED_FROM_LEGACY_README</p><h2 id="recommendations-title">Recommended<br><em>practice paths</em></h2></div>
       <div class="recommendations-summary"><strong>${items.length}</strong><span>HAND-PICKED<br>PROBLEMS</span></div>
     </header>
-    <p class="recommendations-intro">โจทย์ที่น่าสนใจและเทคนิคสำคัญจาก README เดิม เรียงเป็นเส้นทางฝึก พร้อมเอกสารและวิดีโอสำหรับเรียนก่อนลงมือทำ</p>
+    <p class="recommendations-intro">Interesting problems and essential techniques curated from the original README, organized into guided practice paths with documentation and videos to help you learn before solving.</p>
     <div class="learning-tracks">
       ${tracks.map((track, trackIndex) => {
         const trackItems = items.filter((item) => item.track === track);
@@ -61,6 +61,14 @@ function recommendationsMarkup() {
   </section>`;
 }
 
+function recommendationsPageMarkup() {
+  return `<div class="recommendations-view view-enter">
+    <div class="terminal-label"><span>~/cedt/com_prog/recommended</span><span>practice-paths.exe</span></div>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="#/">ROOT</a><span>/</span><strong>RECOMMENDED</strong></nav>
+    ${recommendationsMarkup()}
+  </div>`;
+}
+
 function sidebarMarkup() {
   const filtered = filterProblems(state.problems, { query: state.query });
   const tree = buildCategoryTree(state.problems);
@@ -71,6 +79,7 @@ function sidebarMarkup() {
   return `<aside class="sidebar ${state.sidebarOpen ? 'is-open' : ''}" aria-label="Problem navigation">
     <div class="sidebar-head"><span>COURSE_INDEX</span><button class="sidebar-close" type="button" aria-label="Close problem navigation">×</button></div>
     <nav class="course-tree" id="course-tree">
+      <a class="featured-nav ${pageRoute(location.hash).page === 'recommended' ? 'active' : ''}" href="#/recommended"><span>★</span><strong>Recommended</strong><small>26</small></a>
       ${tree.map((parent) => {
         const visibleChildren = parent.children.map((child) => ({ ...child, visible: child.problems.filter((problem) => filtered.includes(problem)) })).filter((child) => !state.query || child.visible.length);
         if (!visibleChildren.length) return '';
@@ -134,7 +143,6 @@ function overviewMarkup() {
       <div class="quick-start"><div class="panel-title"><span>QUICK_START.md</span><i></i></div><ol><li><span>01</span><div><strong>Choose a chapter</strong><p>Expand a topic in the navigation tree.</p></div></li><li><span>02</span><div><strong>Open a problem</strong><p>Read its statement without leaving the workspace.</p></div></li><li><span>03</span><div><strong>Study the source</strong><p>Switch to the solution tab when it is available.</p></div></li></ol></div>
       <div class="topic-terminal"><div class="panel-title"><span>topics.list</span><i></i></div><div class="terminal-body">${groups.slice(0,10).map((group) => `<button type="button" data-jump="${escapeHtml(group.name)}"><span>${categoryCode(group)}</span><strong>${escapeHtml(group.name)}</strong><small>${group.problems.length}</small></button>`).join('')}<p><span>$</span> select a topic to continue<span class="cursor">█</span></p></div></div>
     </section>
-    ${recommendationsMarkup()}
   </div>`;
 }
 
@@ -225,6 +233,7 @@ function bindSidebar() {
   const close = () => { state.sidebarOpen = false; updateSidebar(); };
   document.querySelector('.sidebar-close').addEventListener('click', close);
   document.querySelector('.sidebar-scrim').onclick = close;
+  document.querySelector('.featured-nav').addEventListener('click', () => { state.sidebarOpen = false; });
   document.querySelectorAll('.tree-problem').forEach((link) => link.addEventListener('click', () => { state.sidebarOpen = false; }));
 }
 
@@ -251,9 +260,10 @@ function bindView(problem) {
 }
 
 function renderRoute() {
+  const route = pageRoute(location.hash);
   const problem = activeProblem();
-  document.title = problem ? `${problem.code} ${problem.title} · Problem Browser` : '2110104 Computer Programming · Problem Browser';
-  document.querySelector('#main').innerHTML = problem ? problemMarkup(problem) : overviewMarkup();
+  document.title = problem ? `${problem.code} ${problem.title} · Problem Browser` : route.page === 'recommended' ? 'Recommended Practice · Problem Browser' : '2110104 Computer Programming · Problem Browser';
+  document.querySelector('#main').innerHTML = problem ? problemMarkup(problem) : route.page === 'recommended' ? recommendationsPageMarkup() : overviewMarkup();
   bindView(problem);
   updateSidebar();
   document.querySelector('#main').scrollTo(0, 0);
