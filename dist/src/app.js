@@ -1,7 +1,7 @@
-import { adjacentProblems, filterProblems, groupProblemsByCategory, summarizeProblems } from './lib/content.js';
+import { adjacentProblems, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, summarizeProblems } from './lib/content.js';
 
 const app = document.querySelector('#app');
-const state = { problems: [], query: '', openCategories: new Set(), sidebarOpen: false };
+const state = { problems: [], query: '', openCategories: new Set(), closedCategories: new Set(), sidebarOpen: false };
 
 const icon = (name) => ({
   menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
@@ -39,7 +39,7 @@ function sidebarMarkup() {
       ${groups.map((group) => {
         const visible = group.problems.filter((problem) => filtered.includes(problem));
         if (state.query && !visible.length) return '';
-        const isOpen = state.query || state.openCategories.has(group.name) || active?.category === group.name;
+        const isOpen = categoryIsOpen({ category: group.name, activeCategory: active?.category, query: state.query, openCategories: state.openCategories, closedCategories: state.closedCategories });
         return `<section class="tree-group ${isOpen ? 'open' : ''}">
           <button class="tree-heading" type="button" data-category="${escapeHtml(group.name)}" aria-expanded="${isOpen}">
             ${icon('chevron')}<span class="tree-code">${categoryCode(group)}</span><strong>${escapeHtml(group.name)}</strong><span class="tree-count">${visible.length || group.problems.length}</span>
@@ -156,15 +156,23 @@ function toggleTheme() {
 }
 
 function updateSidebar() {
-  const old = document.querySelector('.sidebar');
-  old.outerHTML = sidebarMarkup();
+  preserveScrollPosition(
+    () => document.querySelector('#course-tree'),
+    () => { document.querySelector('.sidebar').outerHTML = sidebarMarkup(); },
+  );
   bindSidebar();
 }
 
 function bindSidebar() {
   document.querySelectorAll('.tree-heading').forEach((button) => button.addEventListener('click', () => {
     const category = button.dataset.category;
-    state.openCategories.has(category) ? state.openCategories.delete(category) : state.openCategories.add(category);
+    if (button.getAttribute('aria-expanded') === 'true') {
+      state.openCategories.delete(category);
+      state.closedCategories.add(category);
+    } else {
+      state.closedCategories.delete(category);
+      state.openCategories.add(category);
+    }
     updateSidebar();
   }));
   const close = () => { state.sidebarOpen = false; updateSidebar(); };
@@ -174,6 +182,7 @@ function bindSidebar() {
 }
 
 function jumpToCategory(category) {
+  state.closedCategories.delete(category);
   state.openCategories.add(category);
   state.query = '';
   state.sidebarOpen = matchMedia('(max-width: 760px)').matches;

@@ -50,3 +50,16 @@ export function adjacentProblems(problems, id) {
   if (index < 0) return { previous: null, next: null };
   return { previous: problems[index - 1] || null, next: problems[index + 1] || null };
 }
+
+export function categoryIsOpen({ category, activeCategory, query, openCategories, closedCategories }) {
+  if (query) return true;
+  if (closedCategories.has(category)) return false;
+  return openCategories.has(category) || activeCategory === category;
+}
+
+export function preserveScrollPosition(getScroller, render) {
+  const scrollTop = getScroller()?.scrollTop ?? 0;
+  render();
+  const nextScroller = getScroller();
+  if (nextScroller) nextScroller.scrollTop = scrollTop;
+}

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { adjacentProblems, filterProblems, groupProblemsByCategory, slugify, summarizeProblems } from '../src/lib/content.js';
+import { adjacentProblems, categoryIsOpen, filterProblems, groupProblemsByCategory, preserveScrollPosition, slugify, summarizeProblems } from '../src/lib/content.js';
 
 test('slugify keeps problem codes readable and makes Thai-safe folder names', () => {
   assert.equal(slugify('04_Array_23', 'ค่าเหยียบแผ่นดิน'), '04_Array_23-ค่าเหยียบแผ่นดิน');
@@ -45,4 +45,17 @@ test('adjacentProblems returns previous and next records at list boundaries', ()
   assert.deepEqual(adjacentProblems(problems, 'a'), { previous: null, next: problems[1] });
   assert.deepEqual(adjacentProblems(problems, 'b'), { previous: problems[0], next: problems[2] });
   assert.deepEqual(adjacentProblems(problems, 'c'), { previous: problems[1], next: null });
+});
+
+test('categoryIsOpen lets an explicit user collapse override the active problem', () => {
+  const base = { category: 'Arrays', activeCategory: 'Arrays', query: '', openCategories: new Set(['Arrays']) };
+  assert.equal(categoryIsOpen({ ...base, closedCategories: new Set() }), true);
+  assert.equal(categoryIsOpen({ ...base, closedCategories: new Set(['Arrays']) }), false);
+  assert.equal(categoryIsOpen({ ...base, query: 'array', closedCategories: new Set(['Arrays']) }), true);
+});
+
+test('preserveScrollPosition restores scroll after a sidebar element is replaced', () => {
+  let scroller = { scrollTop: 133 };
+  preserveScrollPosition(() => scroller, () => { scroller = { scrollTop: 0 }; });
+  assert.equal(scroller.scrollTop, 133);
 });
