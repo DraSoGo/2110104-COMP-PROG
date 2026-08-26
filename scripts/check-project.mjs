@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const source = '/home/drasogun/Downloads/drive-download-20260826T055608Z-1-001';
+const source = process.env.CONTENT_SOURCE_DIR || '/home/drasogun/Downloads/drive-download-20260826T055608Z-1-001';
 const problems = JSON.parse(await readFile(path.join(root, 'data', 'problems.json'), 'utf8'));
 const errors = [];
 const ids = new Set();
@@ -21,12 +21,14 @@ async function walk(folder, accept) {
   return files;
 }
 
+const sourceAvailable = await exists(source);
+
 for (const problem of problems) {
   if (ids.has(problem.id)) errors.push(`Duplicate id: ${problem.id}`);
   ids.add(problem.id);
   for (const key of ['pdf', 'solution', 'testcase']) if (problem[key] && !(await exists(path.join(root, problem[key])))) errors.push(`Missing ${key}: ${problem[key]}`);
   if (!problem.code || !problem.title || !problem.category) errors.push(`Incomplete metadata: ${problem.id}`);
-  if (problem.pdf) {
+  if (problem.pdf && sourceAvailable) {
     const metadata = JSON.parse(await readFile(path.join(root, 'problems', problem.id, 'metadata.json'), 'utf8'));
     const original = path.join(source, metadata.source);
     if (!(await exists(original))) errors.push(`Missing original PDF: ${metadata.source}`);
@@ -43,5 +45,7 @@ if (originalSolutionHashes.length && JSON.stringify(originalSolutionHashes) !== 
 if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1; }
 else {
   console.log(`Validated ${actual.problems} problems, ${actual.pdfs} PDFs, ${actual.solutions} solutions, ${actual.testcases} testcase sets, and ${actual.categories} categories.`);
-  console.log(originalSolutionHashes.length ? 'Every organized PDF and solution matches its source byte for byte.' : 'Every organized PDF matches its source byte for byte; the original solution tree is not present, so organized solution paths and counts were validated.');
+  if (!sourceAvailable) console.log('Original PDF source is not present; organized PDF paths and counts were validated.');
+  else console.log('Every organized PDF matches its source byte for byte.');
+  console.log(originalSolutionHashes.length ? 'Every organized solution matches its source byte for byte.' : 'The original solution tree is not present, so organized solution paths and counts were validated.');
 }
