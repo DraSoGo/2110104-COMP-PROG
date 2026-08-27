@@ -1,6 +1,8 @@
 import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, pageRoute, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
 import { highlightCpp } from './lib/cpp-highlight.js';
 import { resolveRecommendations } from './lib/recommendations.js';
+import { formatBytes, loadTestcasePair } from './lib/testcase-viewer.js';
+import { showTemporaryButtonStatus } from './lib/ui.js';
 
 const app = document.querySelector('#app');
 const state = { problems: [], query: '', openCategories: new Set(), closedCategories: new Set(), sidebarOpen: false };
@@ -165,13 +167,13 @@ function problemMarkup(problem) {
     <div class="tab-bar" role="tablist" aria-label="Problem resources">
       <button role="tab" aria-selected="true" data-tab="statement">${icon('file')}<span>STATEMENT</span><small>${problem.pdf ? 'READY' : 'MISSING'}</small></button>
       <button role="tab" aria-selected="false" data-tab="solution">${icon('code')}<span>SOLUTION</span><small>${problem.solution ? 'READY' : 'MISSING'}</small></button>
-      <button role="tab" aria-selected="false" data-tab="testcases">${icon('flask')}<span>TESTCASES</span><small>${problem.testcase ? 'READY' : 'PENDING'}</small></button>
+      <button role="tab" aria-selected="false" data-tab="testcases">${icon('flask')}<span>TESTCASES</span><small>${problem.testcase ? problem.testcases.length : 'PENDING'}</small></button>
     </div>
     <section class="tab-panel" id="panel-statement" role="tabpanel">
       ${problem.pdf ? `<div class="resource-toolbar"><span>${icon('file')}<code>problem.pdf</code></span><div><a href="${asset(problem.pdf)}" target="_blank" rel="noopener">OPEN ${icon('external')}</a><a href="${asset(problem.pdf)}" download>DOWNLOAD</a></div></div><object class="pdf-viewer" data="${asset(problem.pdf)}" type="application/pdf">${emptyResource('file','PDF preview unavailable','Open the statement in a new browser tab.')}</object>` : emptyResource('file','Statement unavailable','No PDF is associated with this problem yet.')}
     </section>
     <section class="tab-panel" id="panel-solution" role="tabpanel" hidden><div id="solution-content">${problem.solution ? '<div class="inline-loader"><span></span>READING solution.cpp...</div>' : emptyResource('code','Solution unavailable','No existing solution is associated with this problem.')}</div></section>
-    <section class="tab-panel" id="panel-testcases" role="tabpanel" hidden>${problem.testcase ? `<div class="testcase-state">${icon('flask')}<div><code>TESTCASE_SET: READY</code><h3>Testcases available</h3><p>This folder is maintained manually.</p></div><a href="${asset(problem.testcase)}">OPEN FOLDER</a></div>` : emptyResource('flask','Testcases pending','Testcase content will be added and maintained manually.')}</section>
+    <section class="tab-panel" id="panel-testcases" role="tabpanel" hidden>${problem.testcase ? `<div class="testcase-browser"><header><span>TEST SET</span><strong>${problem.testcases.length}</strong><small>INPUT / EXPECTED OUTPUT</small></header><div id="testcase-list"><div class="inline-loader"><span></span>LOADING TESTCASES...</div></div></div>` : emptyResource('flask','Testcases pending','Testcase content will be added and maintained manually.')}</section>
     <nav class="problem-pagination" aria-label="Adjacent problems">
       ${adjacent.previous ? `<a href="#/problem/${encodeURIComponent(adjacent.previous.id)}"><small>← PREVIOUS</small><strong>${escapeHtml(adjacent.previous.code)}</strong><span>${escapeHtml(adjacent.previous.title)}</span></a>` : '<span></span>'}
       ${adjacent.next ? `<a class="next" href="#/problem/${encodeURIComponent(adjacent.next.id)}"><small>NEXT →</small><strong>${escapeHtml(adjacent.next.code)}</strong><span>${escapeHtml(adjacent.next.title)}</span></a>` : '<span></span>'}
@@ -186,10 +188,47 @@ async function loadSolution(problem) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const source = await response.text();
     container.innerHTML = `<div class="code-head"><span><i></i><i></i><i></i><code>solution.cpp</code></span><button type="button" id="copy-code">COPY</button></div><pre tabindex="0" aria-label="C++ solution source"><code class="language-cpp">${highlightCpp(source)}</code></pre>`;
-    document.querySelector('#copy-code').addEventListener('click', async (event) => { await navigator.clipboard.writeText(source); event.currentTarget.textContent = 'COPIED'; setTimeout(() => { event.currentTarget.textContent = 'COPY'; }, 1300); });
+    document.querySelector('#copy-code').addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      await navigator.clipboard.writeText(source);
+      showTemporaryButtonStatus(button, 'COPIED', 'COPY');
+    });
   } catch {
     container.innerHTML = emptyResource('code','Solution could not be loaded','Open the source file directly from its problem folder.');
   }
+}
+
+function testcaseSideMarkup(side, label, index) {
+  const rawLink = side.file ? `<a href="${asset(side.file.path)}" target="_blank" rel="noopener">RAW ${label}</a>` : '';
+  const body = side.error
+    ? `<div class="testcase-error"><code>${escapeHtml(side.error)}</code><span>${label} could not be loaded.</span></div>`
+    : `<pre tabindex="0"><code>${escapeHtml(side.content)}</code></pre>`;
+  return `<section class="testcase-side">
+    <header><strong>${label === 'INPUT' ? 'INPUT' : 'EXPECTED OUTPUT'}</strong><span>${side.file ? formatBytes(side.file.size) : '—'}</span>${rawLink}<button type="button" data-copy-case="${index}" data-copy-side="${label.toLowerCase()}" ${side.error ? 'disabled' : ''}>COPY</button></header>
+    ${body}
+  </section>`;
+}
+
+async function loadTestcases(problem) {
+  const container = document.querySelector('#testcase-list');
+  if (!container || container.dataset.loaded === 'true') return;
+  const loaded = await Promise.all(problem.testcases.map((pair) => loadTestcasePair(pair, fetch, asset)));
+  container.dataset.loaded = 'true';
+  container.innerHTML = loaded.map((pair, index) => `<article class="testcase-card">
+    <header><strong>#${index + 1}</strong><code>${escapeHtml(pair.id)}</code></header>
+    <div class="testcase-columns">${testcaseSideMarkup(pair.input, 'INPUT', index)}${testcaseSideMarkup(pair.output, 'OUTPUT', index)}</div>
+  </article>`).join('');
+  container.querySelectorAll('[data-copy-case]').forEach((button) => button.addEventListener('click', async (event) => {
+    const target = event.currentTarget;
+    const pair = loaded[Number(target.dataset.copyCase)];
+    const side = target.dataset.copySide === 'input' ? pair.input : pair.output;
+    try {
+      await navigator.clipboard.writeText(side.content);
+      showTemporaryButtonStatus(target, 'COPIED', 'COPY');
+    } catch {
+      showTemporaryButtonStatus(target, 'FAILED', 'COPY');
+    }
+  }));
 }
 
 function bindShell() {
@@ -257,6 +296,7 @@ function bindView(problem) {
     document.querySelectorAll('[role="tab"]').forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
     document.querySelectorAll('[role="tabpanel"]').forEach((panel) => { panel.hidden = panel.id !== `panel-${tab.dataset.tab}`; });
     if (tab.dataset.tab === 'solution' && problem.solution && !document.querySelector('#solution-content pre')) loadSolution(problem);
+    if (tab.dataset.tab === 'testcases' && problem.testcase) loadTestcases(problem);
   }));
 }
 

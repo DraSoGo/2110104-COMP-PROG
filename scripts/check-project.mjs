@@ -36,7 +36,7 @@ for (const problem of problems) {
   }
 }
 
-const expected = { problems: 195, pdfs: 134, solutions: 167, testcases: 0, categories: 19 };
+const expected = { problems: 195, pdfs: 134, solutions: 167, testcases: 50, categories: 19 };
 const actual = { problems: problems.length, pdfs: problems.filter((item) => item.pdf).length, solutions: problems.filter((item) => item.solution).length, testcases: problems.filter((item) => item.testcase).length, categories: new Set(problems.map((item) => item.category)).size };
 for (const [key, value] of Object.entries(expected)) if (actual[key] !== value) errors.push(`Expected ${value} ${key}, found ${actual[key]}`);
 const originalSolutionHashes = (await Promise.all((await walk(root, (file) => file.endsWith('.cpp'))).map(hash))).sort();

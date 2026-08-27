@@ -7,6 +7,7 @@ CEDT Problem Atlas is a static web library for Computer Programming exercises, e
 - Search by problem code, title, or chapter
 - Filter by chapter and resource availability
 - Dedicated problem views with embedded PDFs and source-code display
+- Inline testcase viewer with paired inputs, expected outputs, raw-file links, and copy controls
 - Curated practice paths with technique notes and external learning resources
 - Clear states for missing PDFs, solutions, and testcases
 - Responsive layouts, keyboard focus styles, reduced-motion support, and dark mode

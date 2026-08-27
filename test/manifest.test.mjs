@@ -27,5 +27,25 @@ test('scanProblemLibrary discovers artifacts without requiring testcases', async
     solution: 'problems/01-expressions/01_Expr_11-Expression/solution.cpp',
     solutionLanguage: 'cpp',
     testcase: null,
+    testcases: [],
   });
+});
+
+test('scanProblemLibrary pairs testcase inputs and outputs with paths and byte sizes', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'problem-atlas-'));
+  const folder = path.join(root, '02-conditionals', '02_If_11-Faculty-Code');
+  await mkdir(path.join(folder, 'testcase', 'input'), { recursive: true });
+  await mkdir(path.join(folder, 'testcase', 'output'), { recursive: true });
+  await writeFile(path.join(folder, 'metadata.json'), JSON.stringify({ code: '02_If_11', title: 'Faculty Code', category: 'Conditionals', categoryOrder: 2 }));
+  await writeFile(path.join(folder, 'testcase', 'input', '01.in'), '123\n');
+  await writeFile(path.join(folder, 'testcase', 'output', '01.out'), 'ABC\n');
+
+  const [problem] = await scanProblemLibrary(root);
+
+  assert.equal(problem.testcase, 'problems/02-conditionals/02_If_11-Faculty-Code/testcase');
+  assert.deepEqual(problem.testcases, [{
+    id: '01',
+    input: { path: 'problems/02-conditionals/02_If_11-Faculty-Code/testcase/input/01.in', size: 4 },
+    output: { path: 'problems/02-conditionals/02_If_11-Faculty-Code/testcase/output/01.out', size: 4 },
+  }]);
 });
