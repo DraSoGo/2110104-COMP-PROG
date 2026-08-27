@@ -1,4 +1,5 @@
 import { adjacentProblems, buildCategoryTree, categoryIsOpen, filterProblems, groupProblemsByCategory, pageRoute, preserveScrollPosition, problemCategoryPath, summarizeProblems } from './lib/content.js';
+import { highlightCpp } from './lib/cpp-highlight.js';
 import { resolveRecommendations } from './lib/recommendations.js';
 
 const app = document.querySelector('#app');
@@ -184,7 +185,7 @@ async function loadSolution(problem) {
     const response = await fetch(asset(problem.solution));
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const source = await response.text();
-    container.innerHTML = `<div class="code-head"><span><i></i><i></i><i></i><code>solution.cpp</code></span><button type="button" id="copy-code">COPY</button></div><pre tabindex="0"><code>${escapeHtml(source)}</code></pre>`;
+    container.innerHTML = `<div class="code-head"><span><i></i><i></i><i></i><code>solution.cpp</code></span><button type="button" id="copy-code">COPY</button></div><pre tabindex="0" aria-label="C++ solution source"><code class="language-cpp">${highlightCpp(source)}</code></pre>`;
     document.querySelector('#copy-code').addEventListener('click', async (event) => { await navigator.clipboard.writeText(source); event.currentTarget.textContent = 'COPIED'; setTimeout(() => { event.currentTarget.textContent = 'COPY'; }, 1300); });
   } catch {
     container.innerHTML = emptyResource('code','Solution could not be loaded','Open the source file directly from its problem folder.');
