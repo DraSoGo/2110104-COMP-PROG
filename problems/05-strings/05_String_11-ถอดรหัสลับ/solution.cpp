@@ -19,26 +19,23 @@ int main()
     {
         // cout << k << "\n";
         int co = 0,ch = 0;
+        char c = s[s.length()-1];
         string ans = "";
         for (int i = 0; i < s.length(); i++)
         {
             // cout << i << " " << s[i] << " " << co << " : ";
-            if (sp(s[i]) && co == 0)
+            if (s[i] == c)
             {
-                // cout << 0;
-                co = 1;
-            }
-            else if (sp(s[i]) && co == 1 && ch == 1)
-            {
-                // cout << 1;
-                co = 0;
-                ch = 0;
-            }
-            else if (co == 1 && !sp(s[i]))
-            {
-                // cout << 2;
-                ans += s[i];
-                ch = 1;
+                i++;
+                while (1 && i < s.length())
+                {
+                    if (s[i] == c)
+                    {
+                        break;
+                    }
+                    ans += s[i];
+                    i++;
+                }
             }
             // cout << '\n';
         }
