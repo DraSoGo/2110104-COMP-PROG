@@ -19,6 +19,6 @@ int main()
     }
     k += (s[0]-'0');
     s[0] = k+'0';
-    cout << s.substr(0,4) << ans2;
+    cout << s.substr(0,4) << (ans2<100?"0":"") << (ans2<10?"0":"") << ans2;
     return 0;
 }

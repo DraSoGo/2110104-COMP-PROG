@@ -17,12 +17,7 @@ string add(string a,string b)
     }
     // cout << mx.length()-mn.length() << "\n";
     int k = mx.length()-mn.length();
-    while (k--)
-    {
-        mn += "0";
-    }
-    // cout << "\n";
-    reverse(mn.begin(),mn.end());
+    mn = string(k, '0') + mn;
     // cout << mx << " " << mn << "\n";
     for (int i = mx.length()-1; i >= 0; i--)
     {
@@ -53,6 +48,7 @@ int main()
         }
         sum = add(sum,x);
     }
+    // reverse(sum.begin(),sum.end());
     cout << sum;
     return 0;
 }
